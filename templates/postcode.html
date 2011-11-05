@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stops near OX4 1LN</title>
+<link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
+<link rel="stylesheet" href="/static/cssbase-min.css" type="text/css" />
+<link rel="stylesheet" href="/static/styles.css" type="text/css" />
+</head>
+<body>
+<header id="toolbar">
+<a id="back" href="/">Back</a>
+<h1>Stops near OX4 1LN<h1>
+</header>
+<section id="content">
+<ul id="item-list">
+{% for stop in stops %}
+<li>
+<a href="#">
+<h2>{{ stop.stop_name }}</h2>
+<h3>{{ stop.distance }} metres</h3>
+</a>
+</li>
+{% endfor %}
+</ul>
+</section>
+<footer>
+Footer content
+</footer>
+</body>
+</html>

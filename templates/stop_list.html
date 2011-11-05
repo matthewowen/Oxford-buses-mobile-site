@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stops near OX4 1LN</title>
+<link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
+<link rel="stylesheet" href="/static/cssbase-min.css" type="text/css" />
+<link rel="stylesheet" href="/static/styles.css" type="text/css" />
+</head>
+<body>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+<header>
+<h1>Stops near OX4 1LN<h1>
+</header>
+<section id="content">
+<ul id="item-list">
+{% for stop in stop_list %}
+<li>
+<h2>{{ stop[-2] }}</h2>
+<h3>{{ stop[-1] }} metres away</h3>
+<a href="#" onclick="toggle_visibility('{{ loop.index }}');">Click here show/hide the bus list</a>
+<ul class="bus-list" id="{{ loop.index }}">
+{% for bus in stop[0:-2] %}
+<li>
+<p class="service">{{ bus.service|replace("&nbsp;", "") }} to {{ bus.destination|replace("&nbsp;", "") }}</p>
+<p class="time">{{ bus.minutes_to_departure }} minutes until departure</p>
+</li>
+{% endfor %}
+</ul>
+</li>
+{% endfor %}
+</ul>
+</section>
+<footer>
+Made by <a href="mailto:matthew.owen95+oxfordbuses@gmail.com" title="Email me">Matthew Owen</a>
+</footer>
+<script type="text/javascript">
+    var collection = document.getElementsByClassName('bus-list');
+    for(var i=0; i<collection.length; i++)
+    {
+      collection[i].style.display = 'none';
+    }
+</script>
+</body>
+</html>

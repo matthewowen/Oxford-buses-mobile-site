@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+ 	<title>Getting location</title>
+</head>
+<body>
+	<h1>Getting your location...</h1>
+	<script src="/static/js/geo.js"></script>
+	<script>
+	if(geo_position_js.init()){
+		geo_position_js.getCurrentPosition(geo_success, geo_error);
+	}
+	function geo_success(p) {
+		window.location= "/stops/" + p.coords.latitude + "+" + p.coords.longitude
+	}
+	function geo_error() {
+		alert("oh no");
+	}
+	</script>
+</body>
+</html>
