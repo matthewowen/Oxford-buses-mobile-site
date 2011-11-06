@@ -81,6 +81,14 @@ h1 {
 	padding: 0.2em;
 }
 
+h1 a {
+	color: #62B1D0;
+}
+
+h1 a:hover {
+	color: #62B1D0;
+}
+
 h2 {
 	font-size: 2em;
 }
