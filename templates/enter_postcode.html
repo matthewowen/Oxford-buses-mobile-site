@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+ 	<title>OxBus: Enter your postcode</title>
+ 	<link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
+	<link rel="stylesheet" href="/static/styles.css" type="text/css" />
+</head>
+<body>
+<header>
+<h1>OxBus: Enter postcode</h1>
+</header>
+<section id="background">
+<h2>
+Enter your postcode
+</h2>
+<h3>
+Enter your postcode below and we'll find the bus stops near you...
+</h3>
+<form method="POST" action="/postcode/">
+<fieldset id="postcode">
+<label for="postcode">Postcode:</label>
+<input type="text" name="postcode" id="postcode"></input>
+</fieldset>
+<input type="submit" value="Submit" id="submit"></input>
+</form>
+</section>
+<footer>
+<h4><a href="/about" title="about">Tap to learn more about OxBus</a></h4>
+</footer>
+</body>
+</html>

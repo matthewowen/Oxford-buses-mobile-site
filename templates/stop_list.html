@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Stops near OX4 1LN</title>
+<title>OxBus: Stops near you</title>
 <link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
-<link rel="stylesheet" href="/static/cssbase-min.css" type="text/css" />
 <link rel="stylesheet" href="/static/styles.css" type="text/css" />
 </head>
 <body>
@@ -19,29 +18,67 @@
 //-->
 </script>
 <header>
-<h1>Stops near OX4 1LN<h1>
+<h1>OxBus: Stops near you</h1>
 </header>
+{% if stop_list %}
 <section id="content">
 <ul id="item-list">
 {% for stop in stop_list %}
+{% if stop['buses'] %}
+<a class="show-more" title="Show/hide" name="{{ loop.index }}" href="#{{ loop.index }}" onclick="toggle_visibility('{{ loop.index }}');">
 <li>
-<h2>{{ stop[-2] }}</h2>
-<h3>{{ stop[-1] }} metres away</h3>
-<a href="#" onclick="toggle_visibility('{{ loop.index }}');">Click here show/hide the bus list</a>
+<div class="show-more">
+<p class="show-more">Tap to show more</p>
+</div>
+<div class="details">
+<h2>{{ stop['name'] }}</h2>
+<h3>{{ stop['distance'] }} metres away</h3>
+<p><span class="label">Next bus: </span>{{ stop.buses[0].service|replace("&nbsp;", "") }} to {{ stop.buses[0].destination|replace("&nbsp;", "") }} - {{ stop.buses[0].minutes_to_departure }} minutes away</p>
+</div>
 <ul class="bus-list" id="{{ loop.index }}">
-{% for bus in stop[0:-2] %}
-<li>
+<h4>Further buses:</h4>
+{% if stop.buses[1:] %}
+{% for bus in stop.buses[1:] %}
+<li class="bus">
 <p class="service">{{ bus.service|replace("&nbsp;", "") }} to {{ bus.destination|replace("&nbsp;", "") }}</p>
 <p class="time">{{ bus.minutes_to_departure }} minutes until departure</p>
 </li>
 {% endfor %}
+{% else %}
+<p>No more buses in the next hour :(</p>
+{% endif %}
 </ul>
 </li>
+</a>
+{% else %}
+<li>
+<div class="details">
+<h2>{{ stop['name'] }}</h2>
+<h3>{{ stop['distance'] }} metres away</h3>
+<p>No buses found in the next hour<p>
+</div>
+{% endif %}
 {% endfor %}
 </ul>
 </section>
+<section id="postcode-instead">
+<p>Results don't look right? <a href="/postcode/" title="search by postcode">Search by postcode instead</a></p>
+</section>
+{% else %}
+<section id="location">
+<h2>Oh dear, we couldn't find any bus stops near you!</h2>
+<h3>Use the form below if you'd like to search by postcode:</h3>
+<form method="POST" action="/postcode/">
+<fieldset id="postcode">
+<label for="postcode">Postcode:</label>
+<input type="text" name="postcode" id="postcode"></input>
+</fieldset>
+<input type="submit" value="Submit" id="submit"></input>
+</form>
+</section>
+{% endif %}
 <footer>
-Made by <a href="mailto:matthew.owen95+oxfordbuses@gmail.com" title="Email me">Matthew Owen</a>
+<h4><a href="/about" title="about">Tap to learn more about OxBus</a></h4>
 </footer>
 <script type="text/javascript">
     var collection = document.getElementsByClassName('bus-list');

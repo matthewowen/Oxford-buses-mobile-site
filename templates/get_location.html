@@ -3,19 +3,41 @@
 <head>
 	<meta charset="utf-8">
  	<title>Getting location</title>
+ 	<link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
+	<link rel="stylesheet" href="/static/styles.css" type="text/css" />
 </head>
 <body>
-	<h1>Getting your location...</h1>
+<header>
+<h1>OxBus: Finding location</h1>
+</header>
+<section id="background">
+<div id="searching">
+<h2>
+We're trying to find your location to show stops near you...
+</h2>
+<a href="/postcode" title="search by postcode">I'd rather search by postcode</a>
+</div>
+<h2 id="location-found">
+We've found your location! Finding buses at the stops near you...
+</h2>
+</section>
+<footer>
+<h4><a href="/about" title="about">Tap to learn more about OxBus</a></h4>
+</footer>
 	<script src="/static/js/geo.js"></script>
 	<script>
 	if(geo_position_js.init()){
 		geo_position_js.getCurrentPosition(geo_success, geo_error);
 	}
 	function geo_success(p) {
+		var show = document.getElementById('location-found');
+		var hide = document.getElementById('searching');
+		hide.style.display = 'none';
+		show.style.display = 'block';
 		window.location= "/stops/" + p.coords.latitude + "+" + p.coords.longitude
 	}
 	function geo_error() {
-		alert("oh no");
+		window.location= "/no-location/"
 	}
 	</script>
 </body>
