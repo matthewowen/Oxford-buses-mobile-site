@@ -34,11 +34,6 @@ div.details {
 	padding: 0.5em;
 }
 
-#submit {
-	display: block;
-	margin: 10px 0 0 90px;
-}
-
 #postcode-instead {
 	font-size: 1.2em;
 }
@@ -76,7 +71,7 @@ li.bus {
 	border: none;
 	background-color: none;
 	background-image: none;
-	font-size: 0.8em;
+	font-size: 1.4em;
 }
 
 h1 {
@@ -167,9 +162,14 @@ form {
 }
 
 input#postcode {
-	width: 70%;
+	width: 50%;
 }
 
 label {
 	width: 30%;
+}
+
+#submit {
+	display: block;
+	margin: 10px 0 0 35%;
 }
