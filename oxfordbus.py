@@ -97,6 +97,14 @@ def stops(latitude, longitude):
 def about():
 	return render_template('about.html')
 
+@app.errorhandler(404)
+def page_not_found(error):
+	return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+	return render_template('500.html'), 500
+
 if app.config['DEBUG']:
     from werkzeug import SharedDataMiddleware
     import os
