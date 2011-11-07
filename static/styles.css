@@ -1,7 +1,7 @@
 body {
 	font-family: Helvetica, sans-serif;
 	color: #050505;
-	font-size: 1.5em;
+	width: 100%;
 }
 
 header {
@@ -23,18 +23,17 @@ div.show-more {
 
 div.details {
 	width: 75%;
-	min-height: 4em;
+	min-height: 2em;
 	margin: 0.2em;
 }
 
 #background, #about, #postcode-instead {
 	background-color: #62B1D0;
-	font-size: 1.5em;
 	padding: 0.5em;
 }
 
 #postcode-instead {
-	font-size: 1.2em;
+	font-size: 1.8em;
 }
 
 ul {
@@ -70,11 +69,10 @@ li.bus {
 	border: none;
 	background-color: none;
 	background-image: none;
-	font-size: 1.4em;
 }
 
 h1 {
-	font-size: 3em;
+	font-size: 2em;
 	font-weight: bold;
 	color: #62B1D0;
 	padding: 0.2em;
@@ -89,7 +87,7 @@ h1 a:hover {
 }
 
 h2 {
-	font-size: 2em;
+	font-size: 1.4em;
 }
 
 li h2 {
@@ -105,12 +103,11 @@ h2#location-found {
 }
 
 h3 {
-	font-size: 1.6em;
+	font-size: 1.2em;
 }
 
 li h3 {
 	display: inline;
-	font-size: 2em;
 	font-weight: normal;
 	margin-left: 0.5em;
 	border-left: 1px black dotted;
@@ -120,17 +117,14 @@ li h3 {
 h4 {
 	font-weight: bold;
 	padding-bottom: 0.2em;
-	font-size: 2em;
 }
 
 footer h4 {	
 	padding: 0.4em;
-	font-size: 2.4em
 }
 
 p {
 	margin:0.2em 0 0;
-	font-size: 1.5em;
 }
 
 #postcode-instead p {
@@ -138,7 +132,6 @@ p {
 }
 
 #about p {
-	font-size: 1.6em;
 	margin-left: 0.2em;
 }
 
@@ -161,22 +154,13 @@ a:hover {
 }
 
 form {
-	font-size: 1.6em;
 	margin-top: 0.5em;
 	border: 2px black solid;
 	border-radius: 5px;
 	padding: 0.5em 0.2em;
 }
 
-input#postcode {
-	width: 50%;
-}
-
-label {
-	width: 30%;
-}
-
 #submit {
 	display: block;
-	margin: 10px 0 0 35%;
+	margin: 10px 0 0 4.5em;
 }
