@@ -5,15 +5,21 @@ body {
 }
 
 header {
-	background-color: #024C68;
+	background-color: #8B8B83;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
 }
 
 section {
-	background-color: white;
+	background-color: #FFFFCC;
+	padding: 3em 0.5em 0.5em;
 }
 
 footer {
-	background-color: #024C68;
+	background-color: #8B8B83;
 }
 
 div.show-more {
@@ -24,17 +30,16 @@ div.show-more {
 div.details {
 	width: 75%;
 	min-height: 2em;
-	margin: 0.2em;
 }
 
-#background, #about, #postcode-instead {
-	background-color: #62B1D0;
-	padding: 0.5em;
+#about {
+	padding: 3em 0.5em 0.5em;
 }
 
 ul {
 	margin: 0;
-	padding: 5px;
+	padding: 0;
+	background-color: #FFFFCC;
 }
 
 #about ul{
@@ -43,21 +48,15 @@ ul {
 
 li {
 	list-style: none;
-	border: 2px solid black;
-	border-radius: 5px;
-	margin-bottom: 5px;
+	padding: 5px;
 	clear: both;
-	background-color: #62B1D0;
-  	background-image: -webkit-gradient(linear, left top, left bottom, from(#62B1D0), to(#3AA6D0)); 
-  	background-image: -webkit-linear-gradient(top, #62B1D0, #3AA6D0); 
-  	background-image:    -moz-linear-gradient(top, #62B1D0, #3AA6D0); 
-  	background-image:     -ms-linear-gradient(top, #62B1D0, #3AA6D0); 
-  	background-image:      -o-linear-gradient(top, #62B1D0, #3AA6D0); 
-  	background-image:         linear-gradient(top, #62B1D0, #3AA6D0); 
+	background-color: #FFFFCC;
+	border-bottom: 1px solid black;
 }
 
 li.bus {
 	padding: 0.2em;
+	border: none;
 	background-image: none;
 }
 
@@ -70,16 +69,7 @@ li.bus {
 h1 {
 	font-size: 2em;
 	font-weight: bold;
-	color: #62B1D0;
 	padding: 0.2em;
-}
-
-h1 a {
-	color: #62B1D0;
-}
-
-h1 a:hover {
-	color: #62B1D0;
 }
 
 h2 {
@@ -103,11 +93,7 @@ h3 {
 }
 
 li h3 {
-	display: inline;
 	font-weight: normal;
-	margin-left: 0.5em;
-	border-left: 1px black dotted;
-	padding-left: 0.5em;
 }
 
 h4 {
@@ -147,12 +133,14 @@ a:hover {
 
 form {
 	margin-top: 0.5em;
-	border: 2px black solid;
-	border-radius: 5px;
 	padding: 0.5em 0.2em;
 }
 
 #submit {
 	display: block;
 	margin: 10px 0 0 4.5em;
+}
+
+#postcode-instead{
+	padding: 0.5em;
 }

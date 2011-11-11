@@ -70,6 +70,7 @@ def get_location():
 @app.route('/stops/<latitude>+<longitude>')
 def stops(latitude, longitude):
 	stop_list = query_db('SELECT * FROM (SELECT AtcoCode, CommonName, Landmark, (((latitude - ?) * (latitude - ?)) + (longitude - (?)) * (longitude - (?))) * (110 * 110) AS dist FROM stops ORDER BY dist ASC) AS tab WHERE tab.dist <= (0.75 * 0.75);', [latitude, latitude, longitude, longitude])
+	stop_list = stop_list[:10]
 	options = []
 	for bus_stop in stop_list:
 		atco = bus_stop["AtcoCode"]
