@@ -75,7 +75,7 @@ def stops(latitude, longitude):
 	for bus_stop in stop_list:
 		atco = bus_stop["AtcoCode"]
 		atco = atco[1:-1]
-		buses = stop(atco, "oxfordshire")
+		buses = stop(atco, "oxfordshire")[:10]
 		name = bus_stop["CommonName"]
 		name = name[1:-1]
 		landmark = bus_stop["Landmark"]
@@ -85,12 +85,10 @@ def stops(latitude, longitude):
 		else:
 			names = [name, landmark]
 			name = " ".join(names)
-		#buses.append(name)
 		distance = bus_stop["dist"]
 		distance = distance * 1000
 		distance = int(distance)
 		stop_details = {'name': name, 'distance': distance, 'buses': buses}
-		#buses.append(distance)
 		options.append(stop_details)
 	return render_template('stop_list.html', stop_list=options)
 

@@ -1,40 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>OxBus|Nearby stops</title>
-<link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
-<link rel="stylesheet" href="/static/styles.css" type="text/css" />
-<meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
-<meta name="viewport" content="width=device-width" />
-<script type="text/javascript">
+{% extends "base.html" %}
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19020255-3']);
-  _gaq.push(['_trackPageview']);
+{% block head %}
+<title>OxBus | Nearby stops</title>
+{% endblock %}
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-</head>
-<body>
-<script type="text/javascript">
-<!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
-//-->
-</script>
-<header>
+{% block header %}
 <h1><a href="/" title="Find location">OxBus</a>: Nearby stops</h1>
-</header>
+{% endblock %}
+
+{% block body %}
+
 {% if stop_list %}
 <section id="content">
 <ul id="item-list">
@@ -42,8 +17,7 @@
 {% if stop['buses'] %}
 <a class="show-more" title="Show/hide" name="{{ loop.index }}" href="#{{ loop.index }}" onclick="toggle_visibility('{{ loop.index }}');">
 <li>
-<div class="show-more">
-<p class="show-more">Tap to show more</p>
+<div class="show-more" id="arrow-{{ loop.index }}">
 </div>
 <div class="details">
 <h2>{{ stop['name'] }}</h2>
@@ -77,7 +51,7 @@
 </ul>
 </section>
 <section id="postcode-instead">
-<p>Results don't look right? <a href="/postcode/" title="search by postcode">Search by postcode instead</a></p>
+<p>Results don't look right? <a href="/postcode/" title="search by postcode">Search by postcode instead...</a></p>
 </section>
 {% else %}
 <section id="location">
@@ -92,15 +66,23 @@
 </form>
 </section>
 {% endif %}
-<footer>
-<h4><a href="/about" title="about">Tap to learn more about OxBus</a></h4>
-</footer>
+{% endblock %}
+
+{% block script%}
 <script type="text/javascript">
-    var collection = document.getElementsByClassName('bus-list');
-    for(var i=0; i<collection.length; i++)
-    {
-      collection[i].style.display = 'none';
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       var b = document.getElementById("arrow-" + id)
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+       if(b.className == 'show-more-expanded')
+          b.className = 'show-more';
+       else
+          b.className = 'show-more-expanded';
     }
+//-->
 </script>
-</body>
-</html>
+{% endblock %}
