@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
- 	<title>OxBus: 404</title>
- 	<link rel="stylesheet" href="/static/cssreset-min.css" type="text/css" />
-	<link rel="stylesheet" href="/static/styles.css" type="text/css" />
-</head>
-<body>
-<header>
+{% extends "base.html" %}
+
+{% block head %}
+<title>OxBus: 404</title>
+{% endblock %}
+
+{% block header %}
 <h1><a href="/" title="Find location">OxBus</a>: 404</h1>
-</header>
+{% endblock %}
+
+{% block body %}
 <section id="about">
 <h2>Hmmm, we can't find what you're looking for.</h2>
 <p>If you <a href="/" title="Find location">let us find your location</a>, we'll look for the stops near you</p>
 </section>
-<footer>
-<h4><a href="/about" title="about">Tap to learn more about OxBus</a></h4>
-</footer>
-</body>
-</html>
+{% endblock %}
