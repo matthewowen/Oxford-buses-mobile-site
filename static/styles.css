@@ -163,3 +163,8 @@ form {
 #postcode-instead{
 	padding: 0.5em;
 }
+
+.ff {
+	position: relative;
+	top: -1.8em;
+}

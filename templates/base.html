@@ -22,7 +22,7 @@
 {% endblock %}
 </head>
 <body>
-<header>
+<header id="h">
 {% block header %}
 <h1><a href="/" title="Find location">OxBus</a>: Nearby stops</h1>
 {% endblock %}
@@ -34,9 +34,18 @@
 {% endblock %}
 
 </article>
-<footer>
+<footer id="f">
 <h4><a href="/about" title="about">Tap to learn more about OxBus</a></h4>
 </footer>
+<script type="text/javascript">
+	var h = document.getElementById('h');
+	var f = document.getElementById('f');
+	if(navigator.platform == 'iPad' || navigator.platform == 'iPhone' || navigator.platform == 'iPod')
+	{ 
+	  f.className = 'ff';
+	};
+</script>
+
 <script type="text/javascript">
     var collection = document.getElementsByClassName('bus-list');
     for(var i=0; i<collection.length; i++)
