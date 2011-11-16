@@ -1,4 +1,4 @@
-from busscraper.busscraper import stop, postcode
+from busscraper import stop, postcode
 
 import httplib2
 

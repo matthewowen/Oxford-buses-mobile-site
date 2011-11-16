@@ -1,0 +1,8 @@
+BeautifulSoup==3.2.0
+BusScraper==0.1.3
+Flask==0.8
+Jinja2==2.6
+Werkzeug==0.8.1
+httplib2==0.7.2
+simplejson==2.2.1
+wsgiref==0.1.2
