@@ -20,6 +20,43 @@ DATABASE = 'stopsdb'
 def connect_db():
     return sqlite3.connect(DATABASE)
 
+def get_stops(latitude, longitude, offset):
+	# get the nearby stops from the database
+	stop_list = query_db('SELECT * FROM (SELECT AtcoCode, CommonName, Landmark, (((latitude - ?) * (latitude - ?)) + (longitude - (?)) * (longitude - (?))) * (110 * 110) AS dist FROM stops ORDER BY dist ASC) AS tab WHERE tab.dist <= (0.75 * 0.75);', [latitude, latitude, longitude, longitude])
+	"""
+	use the offset to figure out which stops in the list we're interested in.
+	if the list has more stops beyond those we're using, set the more variable to be true
+	"""
+	length = len(stop_list)
+	u = offset + 10
+	if length > u:
+		more = True
+	else:
+		more = False
+	stop_list = stop_list[offset:u]
+	# run through the new stop list getting the info for each one
+	options = []
+	for bus_stop in stop_list:
+		atco = bus_stop["AtcoCode"]
+		atco = atco[1:-1]
+		buses = stop(atco, "oxfordshire")[:10]
+		name = bus_stop["CommonName"]
+		name = name[1:-1]
+		landmark = bus_stop["Landmark"]
+		landmark = landmark[1:-1]
+		if name == landmark:
+			pass
+		else:
+			names = [name, landmark]
+			name = " ".join(names)
+		distance = bus_stop["dist"]
+		distance = distance * 1000
+		distance = int(distance)
+		stop_details = {'name': name, 'distance': distance, 'buses': buses}
+		options.append(stop_details)
+	# return a tuple containing the list of stop options, and whether or not there are more stops
+	return (options, more)
+
 @app.before_request
 def before_request():
     g.db = connect_db()
@@ -69,28 +106,10 @@ def get_location():
 
 @app.route('/stops/<latitude>+<longitude>')
 def stops(latitude, longitude):
-	stop_list = query_db('SELECT * FROM (SELECT AtcoCode, CommonName, Landmark, (((latitude - ?) * (latitude - ?)) + (longitude - (?)) * (longitude - (?))) * (110 * 110) AS dist FROM stops ORDER BY dist ASC) AS tab WHERE tab.dist <= (0.75 * 0.75);', [latitude, latitude, longitude, longitude])
-	stop_list = stop_list[:10]
-	options = []
-	for bus_stop in stop_list:
-		atco = bus_stop["AtcoCode"]
-		atco = atco[1:-1]
-		buses = stop(atco, "oxfordshire")[:10]
-		name = bus_stop["CommonName"]
-		name = name[1:-1]
-		landmark = bus_stop["Landmark"]
-		landmark = landmark[1:-1]
-		if name == landmark:
-			pass
-		else:
-			names = [name, landmark]
-			name = " ".join(names)
-		distance = bus_stop["dist"]
-		distance = distance * 1000
-		distance = int(distance)
-		stop_details = {'name': name, 'distance': distance, 'buses': buses}
-		options.append(stop_details)
-	return render_template('stop_list.html', stop_list=options)
+	loc_info = get_stops(latitude, longitude, 0)
+	options = loc_info[0]
+	more = loc_info[-1]
+	return render_template('stop_list.html', stop_list=options, more=more)
 
 @app.route('/about')
 def about():
@@ -112,4 +131,4 @@ if app.config['DEBUG']:
     })
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0')
+	app.run(host='0.0.0.0', debug=True)
