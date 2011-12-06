@@ -38,12 +38,9 @@ def get_stops(latitude, longitude, offset):
 	options = []
 	for bus_stop in stop_list:
 		atco = bus_stop["AtcoCode"]
-		atco = atco[1:-1]
 		buses = stop(atco, "oxfordshire")[:10]
 		name = bus_stop["CommonName"]
-		name = name[1:-1]
 		landmark = bus_stop["Landmark"]
-		landmark = landmark[1:-1]
 		if name == landmark:
 			pass
 		else:
