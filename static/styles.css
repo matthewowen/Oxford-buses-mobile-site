@@ -168,3 +168,7 @@ form {
 	position: relative;
 	top: -1.8em;
 }
+
+#searching {
+	display: none;
+}

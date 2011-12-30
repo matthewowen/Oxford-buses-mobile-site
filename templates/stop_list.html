@@ -71,7 +71,17 @@
 
 {% block script%}
 <script type="text/javascript">
-<!--
+  <!--
+    var collection = document.getElementsByClassName('bus-list');
+    for(var i=0; i<collection.length; i++)
+    {
+      collection[i].style.display = 'none';
+    }
+  //--!>
+</script>
+
+<script type="text/javascript">
+  <!--
     function toggle_visibility(id) {
        var e = document.getElementById(id);
        var b = document.getElementById("arrow-" + id);
@@ -84,6 +94,6 @@
        else
           b.className = 'show-more-expanded';
     }
-//-->
+  //-->
 </script>
 {% endblock %}

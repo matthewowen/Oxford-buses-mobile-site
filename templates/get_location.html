@@ -10,12 +10,21 @@
 
 {% block body %}
 <section id="content">
+
+<noscript>
+<div id="no-script">
+<h2>For best results with OxBus, please enable Javascript</h2>
+<a href="/postcode" title="search by postcode">Alternatively, click here to search by postcode</a>
+</div>
+</noscript>
+
 <div id="searching">
 <h2>
 We're trying to find your location to show stops near you...
 </h2>
 <a href="/postcode" title="search by postcode">I'd rather search by postcode...</a>
 </div>
+
 <h2 id="location-found">
 We've found your location! Finding buses at the stops near you...
 </h2>
@@ -23,8 +32,15 @@ We've found your location! Finding buses at the stops near you...
 {% endblock %}
 
 {% block script %}
-	<script src="/static/js/geo.js"></script>
-	<script>
+<script>
+	<!--
+		document.getElementById('searching').style.display= 'block';
+	//--!>
+</script>
+
+<script src="/static/js/geo.js"></script>
+<script>
+	<!--
 	if(geo_position_js.init()){
 		geo_position_js.getCurrentPosition(geo_success, geo_error);
 	}
@@ -38,5 +54,6 @@ We've found your location! Finding buses at the stops near you...
 	function geo_error() {
 		window.location= "/no-location/"
 	}
-	</script>
+	//--!>
+</script>
 {% endblock %}
