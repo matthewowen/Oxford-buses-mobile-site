@@ -3,11 +3,12 @@ html, body {
 	color: #050505;
 	width: 100%;
 	height: 100%;	
-	background-color: #FFFFCC;
+	background-color: #FFFAFA;
 }
 
 header {
-	background-color: #8B8B83;
+	background-color: #5CACEE;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#5CACEE), to(#4F94CD));
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -18,13 +19,13 @@ header {
 }
 
 article {
-	background-color: #FFFFCC;
 	padding: 2.5em 0.5em 2.3em;
 	min-height: 100%;
 }
 
 footer {
-	background-color: #8B8B83;
+	background-color: #5CACEE;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#4F94CD), to(#5CACEE));
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -58,7 +59,6 @@ div.details {
 ul {
 	margin: 0;
 	padding: 0;
-	background-color: #FFFFCC;
 }
 
 #about ul{
@@ -69,7 +69,6 @@ li {
 	list-style: none;
 	padding: 5px;
 	clear: both;
-	background-color: #FFFFCC;
 	border-bottom: 1px solid black;
 }
 
