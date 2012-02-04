@@ -23,7 +23,7 @@
             </div>
             <div class="location">
             <h4>{{ stop['distance'] }} metres away</h4>
-            <h4>&gt;&gt; Show on map</h4>
+            <h4 class="show-map">Show on map</h4>
             </div>
             <div class="spacer"></div>
           </a>
@@ -86,7 +86,7 @@
 </section>
 
 {% if more == True %}
-<a onclick="offset = loadMore(offset);">
+<a onclick="offset = loadMore(offset);" id="load-more">
 <section id="load-more">
   <p><h3>Tap to load more</h4>
 </section>
