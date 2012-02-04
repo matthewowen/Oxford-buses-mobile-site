@@ -1,5 +1,5 @@
 html, body {
-	font-family: Helvetica, sans-serif;
+	font-family: Arial, Sans-serif;
 	color: #050505;
 	width: 100%;
 	height: 100%;	
@@ -16,6 +16,7 @@ header {
 	width: 100%;
 	height: 2em
 	overflow: hidden;
+	z-index: 1;
 }
 
 article {
@@ -33,6 +34,7 @@ footer {
 	width: 100%;
 	height: 1.8em;
 	overflow: hidden;
+	z-index: 1;
 }
 
 div.show-more {
@@ -58,16 +60,16 @@ div.details {
 
 div.stopname {
 	width: 45%;
-	min-height: 3em;
+	min-height: 4em;
 	padding: 2%;
 	float: left;
 	color: white;
 	background-color: #808080;
 }
 
-div.location{
+div.location, div.stop-next-bus {
 	float: left;
-	min-height: 3em;
+	min-height: 4em;
 	width: 45%;
 	padding: 2%;
 }
@@ -75,6 +77,7 @@ div.location{
 div.buses {
 	border-top: 1px solid #808080;
 	clear: both;
+	padding: 5px;
 }
 
 div.spacer {
@@ -85,9 +88,12 @@ div.nextbus {
 	min-height: 50px;
 }
 
+div.stop-next-bus div.businfo {
+	width: 100px;
+}
+
 div.info {
 	float: left;
-	width: 80%;
 }
 
 ul {
@@ -105,14 +111,11 @@ li {
 	border: 1px solid black;
 }
 
-#item-list li {
-	padding-top: 0;
-}
-
 li.bus {
 	padding: 0.2em;
 	border: none;
 	background-image: none;
+	padding-top: 10px;
 }
 
 #about li {
@@ -152,12 +155,23 @@ li h3 {
 }
 
 h4 {
-	font-weight: bold;
 	padding-bottom: 0.2em;
 }
 
 footer h4 {	
 	padding: 0.4em;
+}
+
+h4.show-more {
+	float: right;
+	background-color: #808080;
+	margin-right: 10px;
+	padding: 5px;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	border: 1px solid black;
+	vertical-align: middle;
 }
 
 p {
@@ -175,6 +189,33 @@ span.label {
 a {
 	text-decoration: underline;
 	color: black;
+}
+
+h4#buses-jump {
+	padding: 10px 5px;
+	border-top: 1px solid black;
+}
+
+div.service {
+	padding: 0.2em;
+	-webkit-border-radius: 1.1em;
+	-moz-border-radius: 1.1em;
+	border-radius: 1.1em;
+	background-color: red;
+	width: 1.8em;
+	height: 1.8em;
+	text-align: center;
+	color: white;
+	float: left;
+}
+
+div.service h4 {
+	margin-top: 20%;
+}
+
+div.businfo {
+	float: left;
+	margin-left: 10px;
 }
 
 a:hover {
@@ -214,6 +255,8 @@ form {
 	margin-top: 1em;
 	padding: 0.5em;
 	border: 1px solid black;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
 	border-radius: 0.3em;
 }
 

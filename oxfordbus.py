@@ -49,7 +49,7 @@ def get_stops(latitude, longitude, offset):
 		distance = bus_stop["dist"]
 		distance = distance * 1000
 		distance = int(distance)
-		stop_details = {'name': name, 'distance': distance, 'buses': buses}
+		stop_details = {'name': name, 'distance': distance, 'buses': buses, 'atco': atco}
 		options.append(stop_details)
 	# return a tuple containing the list of stop options, and whether or not there are more stops
 	return (options, more)
@@ -116,6 +116,26 @@ def ajax_stops(latitude, longitude, offset):
 	json['more'] = loc_info[-1]
 	return simplejson.dumps(json)
 
+@app.route('/stop/<stop_id>')
+def stop_info(stop_id):
+	stop_info = query_db('SELECT * FROM stops WHERE AtcoCode = ?;', [stop_id])[0]
+	
+	atco = stop_info["AtcoCode"]
+
+	buses = stop(atco, "oxfordshire")[:10]
+	
+	name = stop_info["CommonName"]
+	landmark = stop_info["Landmark"]
+	if name == landmark:
+		pass
+	else:
+		names = [name, landmark]
+		name = " ".join(names)
+
+	stop_details = {'name': name, 'latitude': stop_info['Latitude'], 'longitude': stop_info['Longitude'], 'buses': buses}
+	
+	return render_template('stop_info.html', stop=stop_details)
+
 @app.route('/about')
 def about():
 	return render_template('about.html')
@@ -136,4 +156,4 @@ if app.config['DEBUG']:
     })
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=False)
+	app.run(host='0.0.0.0', debug=True)

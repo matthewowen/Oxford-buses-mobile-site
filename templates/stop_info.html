@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>OxBus | {{stop.name }}</title>
+
+<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false">
+</script>
+{% endblock %}
+
+{% block header %}
+<h1><a href="/" title="Find location">OxBus</a>: {{ stop.name }}</h1>
+{% endblock %}
+
+
+
+{% block body %}
+<section id="stop-content">
+<div class="details">
+	<div class="stopname">
+		<h2>{{ stop['name'] }}</h2>
+	</div>
+	<div class="stop-next-bus">
+	<div class="service">
+		<h4>{{ stop.buses[0].service|replace("&nbsp;", "") }}</h4>
+	</div>
+	<div class="businfo">
+	<p>{{ stop.buses[0].destination|replace("&nbsp;", "") }}</p>
+	<p class="time">{{ stop.buses[0].minutes_to_departure }} minutes</p>
+	</div>
+	</div>
+	<div class="spacer"></div>
+	<a href="#buses"><h4 id="buses-jump">Jump to see more buses</h4></a>
+</div>
+
+<div id="map_canvas" style="width: 100%; height: 300px"></div>
+
+<div class="buses">
+<a name="buses"></a>
+<h4>Later buses:</h4>
+<ul>
+  {% if stop.buses[1:] %}
+    {% for bus in stop.buses[1:] %}
+      <li class="bus">
+        <div class="service">
+			<h4>{{ bus.service|replace("&nbsp;", "") }}</h4>
+		</div>
+		<div class="businfo">
+			<p>To {{ bus.destination|replace("&nbsp;", "") }}</p>
+			<p class="time">{{ bus.minutes_to_departure }} minutes</p>
+		</div>
+      </li>
+    {% endfor %}
+  {% else %}
+    <p>No more buses in the next hour :(</p>
+  {% endif %}
+</ul>
+<div class="spacer"></div>
+</div>
+</div>
+
+</section>
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+function initialize() {
+	myLatLng = new google.maps.LatLng({{ stop.latitude }}, {{ stop.longitude }});
+	var myOptions = {
+		center: myLatLng,
+		zoom: 16,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	var map = new google.maps.Map(document.getElementById("map_canvas"),
+	    myOptions);
+
+	var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: "{{ stop.name }}"
+  })
+}  
+
+initialize();
+
+</script>
+
+{% endblock %}
