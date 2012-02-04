@@ -19,7 +19,7 @@ header {
 }
 
 article {
-	padding: 2.5em 0.5em 2.3em;
+	padding: 2.5em 0 2.3em;
 	min-height: 100%;
 }
 
@@ -52,8 +52,42 @@ div.show-more-expanded {
 }
 
 div.details {
-	width: 75%;
 	min-height: 2em;
+	background-color: #FFFAFA;
+}
+
+div.stopname {
+	width: 45%;
+	min-height: 3em;
+	padding: 2%;
+	float: left;
+	color: white;
+	background-color: #808080;
+}
+
+div.location{
+	float: left;
+	min-height: 3em;
+	width: 45%;
+	padding: 2%;
+}
+
+div.buses {
+	border-top: 1px solid #808080;
+	clear: both;
+}
+
+div.spacer {
+	clear: both;
+}
+
+div.nextbus {
+	min-height: 50px;
+}
+
+div.info {
+	float: left;
+	width: 80%;
 }
 
 ul {
@@ -67,13 +101,12 @@ ul {
 
 li {
 	list-style: none;
-	padding: 5px;
 	clear: both;
-	border-bottom: 1px solid black;
+	border: 1px solid black;
 }
 
-li:last-child {
-	border: none;
+#item-list li {
+	padding-top: 0;
 }
 
 li.bus {
@@ -178,6 +211,7 @@ form {
 
 #load-more{
 	background-color: #808080;
+	margin-top: 1em;
 	padding: 0.5em;
 	border: 1px solid black;
 	border-radius: 0.3em;

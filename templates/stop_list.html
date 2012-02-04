@@ -16,35 +16,60 @@
   {% for stop in stop_list %}
     {% if stop['buses'] %}
       <li>
-        <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
-          <div class="show-more" id="arrow-{{ loop.index }}">
-          </div>
           <div class="details">
+          <a href=#>
+            <div class="stopname">
             <h2>{{ stop['name'] }}</h2>
+            </div>
+            <div class="location">
             <h3>{{ stop['distance'] }} metres away</h3>
-            <p><span class="label">Next bus: </span>{{ stop.buses[0].service|replace("&nbsp;", "") }} to {{ stop.buses[0].destination|replace("&nbsp;", "") }} - {{ stop.buses[0].minutes_to_departure }} minutes away</p>
+            <p>Tap to show on map</p>
+            </div>
+            <div class="spacer"></div>
+          </a>
           </div>
-          <ul class="bus-list" id="{{ loop.index }}">
+          <div class="buses">
+            <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
+            <div class="nextbus">
+              <div class="info">
+                <p><span class="label">Next bus: </span>{{ stop.buses[0].service|replace("&nbsp;", "") }} to {{ stop.buses[0].destination|replace("&nbsp;", "") }} - {{ stop.buses[0].minutes_to_departure }} minutes away</p>
+                <p>Tap to show more buses</p>
+              </div>
+              <div class="show-more" id="arrow-{{ loop.index }}"></div>
+              <div class="spacer"></div>
+            </div>
+            <div class="bus-list" id="{{ loop.index }}">
             <h4>Later buses:</h4>
-            {% if stop.buses[1:] %}
-              {% for bus in stop.buses[1:] %}
-              <li class="bus">
-                <p class="service">{{ bus.service|replace("&nbsp;", "") }} to {{ bus.destination|replace("&nbsp;", "") }}</p>
-                <p class="time">{{ bus.minutes_to_departure }} minutes until departure</p>
-              </li>
-              {% endfor %}
-            {% else %}
-              <p>No more buses in the next hour :(</p>
-            {% endif %}
-          </ul>
-        </a>
+            <ul>
+              {% if stop.buses[1:] %}
+                {% for bus in stop.buses[1:] %}
+                  <li class="bus">
+                    <p class="service">{{ bus.service|replace("&nbsp;", "") }} to {{ bus.destination|replace("&nbsp;", "") }}</p>
+                    <p class="time">{{ bus.minutes_to_departure }} minutes until departure</p>
+                  </li>
+                {% endfor %}
+              {% else %}
+                <p>No more buses in the next hour :(</p>
+              {% endif %}
+            </ul>
+            </div>
+          </a>
+          </div>
       </li>
     {% else %}
       <li>
         <div class="details">
-          <h2>{{ stop['name'] }}</h2>
-          <h3>{{ stop['distance'] }} metres away</h3>
-          <p>No buses found in the next hour<p>
+          <div class="stopname">
+            <h2>{{ stop['name'] }}</h2>
+          </div>
+          <div class="location">
+            <h3>{{ stop['distance'] }} metres away</h3>
+            <p>Tap to show on map</p>
+          </div>
+          <div class="spacer"></div>
+        </div>
+        <div class="buses">
+        <p>No more buses in the next hour</p>
         </div>
       </li>
     {% endif %}
