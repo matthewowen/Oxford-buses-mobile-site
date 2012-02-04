@@ -15,8 +15,8 @@
   <ul id="item-list">
   {% for stop in stop_list %}
     {% if stop['buses'] %}
-      <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
-        <li>
+      <li>
+        <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
           <div class="show-more" id="arrow-{{ loop.index }}">
           </div>
           <div class="details">
@@ -37,8 +37,8 @@
               <p>No more buses in the next hour :(</p>
             {% endif %}
           </ul>
-        </li>
-      </a>
+        </a>
+      </li>
     {% else %}
       <li>
         <div class="details">
@@ -51,6 +51,15 @@
   {% endfor %}
   </ul>
 </section>
+
+{% if more == True %}
+<a onclick="offset = loadMore(offset);">
+<section id="load-more">
+  <p><h3>Tap to load more</h4>
+</section>
+</a>
+{% endif %}
+
 <section id="postcode-instead">
   <p>Results don't look right? <a href="/postcode/" title="search by postcode">Search by postcode instead...</a></p>
 </section>
@@ -71,29 +80,30 @@
 
 {% block script%}
 <script type="text/javascript">
-  <!--
-    var collection = document.getElementsByClassName('bus-list');
-    for(var i=0; i<collection.length; i++)
-    {
-      collection[i].style.display = 'none';
-    }
-  //--!>
+function toggle_visibility(id) 
+{
+  var e = document.getElementById(id);
+  var b = document.getElementById("arrow-" + id);
+  if(e.style.display == 'block')
+  {
+    e.style.display = 'none';
+    b.className = 'show-more';
+  }
+  else
+  {
+    e.style.display = 'block';
+    b.className = 'show-more-expanded';   
+  }
+}
+
+var collection = document.getElementsByClassName('bus-list');
+for(var i=0; i<collection.length; i++)
+{
+  collection[i].style.display = 'none';
+}
 </script>
 
-<script type="text/javascript">
-  <!--
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       var b = document.getElementById("arrow-" + id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-       if(b.className == 'show-more-expanded')
-          b.className = 'show-more';
-       else
-          b.className = 'show-more-expanded';
-    }
-  //-->
-</script>
+{% if more == True %}
+<script src="/static/js/load-more.js"></script>
+{% endif %}
 {% endblock %}

@@ -72,6 +72,10 @@ li {
 	border-bottom: 1px solid black;
 }
 
+li:last-child {
+	border: none;
+}
+
 li.bus {
 	padding: 0.2em;
 	border: none;
@@ -170,4 +174,17 @@ form {
 
 #searching {
 	display: none;
+}
+
+#load-more{
+	background-color: #808080;
+	padding: 0.5em;
+	border: 1px solid black;
+	border-radius: 0.3em;
+}
+
+.loading {
+	background-image: url("/static/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position: right;
 }
