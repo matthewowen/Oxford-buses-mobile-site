@@ -61,7 +61,7 @@ a.details, div.details {
 
 h2.stopname {
 	width: 45%;
-	min-height: 4em;
+	min-height: 2.7em;
 	padding: 2%;
 	float: left;
 	color: white;
@@ -70,7 +70,7 @@ h2.stopname {
 
 div.location, div.stop-next-bus {
 	float: left;
-	min-height: 4em;
+	min-height: 2.7em;
 	width: 45%;
 	padding: 2%;
 }
