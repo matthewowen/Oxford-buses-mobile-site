@@ -22,7 +22,7 @@ def connect_db():
 
 def get_stops(latitude, longitude, offset):
 	# get the nearby stops from the database
-	stop_list = query_db('SELECT * FROM (SELECT AtcoCode, CommonName, Landmark, (((latitude - ?) * (latitude - ?)) + (longitude - (?)) * (longitude - (?))) * (110 * 110) AS dist FROM stops ORDER BY dist ASC) AS tab WHERE tab.dist <= (2 * 2);', [latitude, latitude, longitude, longitude])
+	stop_list = query_db('SELECT * FROM (SELECT AtcoCode, CommonName, Landmark, (((latitude - ?) * (latitude - ?)) + (longitude - (?)) * (longitude - (?))) * (110 * 110) AS dist FROM stops ORDER BY dist ASC) AS tab WHERE tab.dist <= (1 * 1);', [latitude, latitude, longitude, longitude])
 	"""
 	use the offset to figure out which stops in the list we're interested in.
 	if the list has more stops beyond those we're using, set the more variable to be true

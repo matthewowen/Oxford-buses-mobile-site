@@ -207,8 +207,9 @@ a {
 }
 
 h4.buses-jump {
-	padding: 10px 5px;
+	padding: 10px 0;
 	border-top: 1px solid black;
+	text-align: center;
 }
 
 div.service {
