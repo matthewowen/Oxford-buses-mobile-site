@@ -123,6 +123,10 @@ def stop_info(stop_id):
 	atco = stop_info["AtcoCode"]
 
 	buses = stop(atco, "oxfordshire")[:10]
+
+	for bus in buses:
+		bus['service'] = bus['service'].replace("&nbsp;", "")
+		bus['destination'] = bus['destination'].replace("&nbsp;", "")
 	
 	name = stop_info["CommonName"]
 	landmark = stop_info["Landmark"]

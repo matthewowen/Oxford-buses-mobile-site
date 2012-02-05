@@ -8,18 +8,10 @@
 </script>
 {% endblock %}
 
-{% block header %}
-<h1><a href="/" title="Find location">OxBus</a>: {{ stop.name }}</h1>
-{% endblock %}
-
-
-
 {% block body %}
 <section id="stop-content">
 <div class="details">
-	<div class="stopname">
-		<h2>{{ stop['name'] }}</h2>
-	</div>
+	<h2 class="stopname">{{ stop['name'] }}</h2>
 	<div class="stop-next-bus">
 	<div class="service">
 		<h4>{{ stop.buses[0].service|replace("&nbsp;", "") }}</h4>
@@ -30,7 +22,7 @@
 	</div>
 	</div>
 	<div class="spacer"></div>
-	<a href="#buses"><h4 id="buses-jump">Jump to see more buses</h4></a>
+	<a href="#buses" class="buses-jump"><h4 class="buses-jump">Jump to see more buses</h4></a>
 </div>
 
 <div id="map_canvas" style="width: 100%; height: 300px"></div>
@@ -47,7 +39,7 @@
 		</div>
 		<div class="businfo">
 			<p>To {{ bus.destination|replace("&nbsp;", "") }}</p>
-			<p class="time">{{ bus.minutes_to_departure }} minutes</p>
+			<p class="time">{{ bus.minutes_to_departure }} minutes away</p>
 		</div>
       </li>
     {% endfor %}

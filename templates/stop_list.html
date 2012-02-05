@@ -4,10 +4,6 @@
 <title>OxBus | Nearby stops</title>
 {% endblock %}
 
-{% block header %}
-<h1><a href="/" title="Find location">OxBus</a>: Nearby stops</h1>
-{% endblock %}
-
 {% block body %}
 
 {% if stop_list %}
@@ -16,30 +12,25 @@
   {% for stop in stop_list %}
     {% if stop['buses'] %}
       <li>
-          <div class="details">
-          <a href="/stop/{{ stop.atco }}" title="More about {{ stop.name }}">
-            <div class="stopname">
-            <h2>{{ stop['name'] }}</h2>
-            </div>
+          <a class ="details" href="/stop/{{ stop.atco }}" title="More about {{ stop.name }}">
+            <h2 class="stopname">{{ stop['name'] }}</h2>
             <div class="location">
             <h4>{{ stop['distance'] }} metres away</h4>
             <h4 class="show-map">Show on map</h4>
             </div>
             <div class="spacer"></div>
           </a>
-          </div>
           <div class="buses">
             <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
             <div class="nextbus">
               <div class="service">
-                <h4>{{ stop.buses[0].service|replace("&nbsp;", "") }}</h4>
+                <h4>{{ stop.buses[0].service }}</h4>
               </div>
               <div class="businfo">
-                <p>To {{ stop.buses[0].destination|replace("&nbsp;", "") }}</p>
-                <p class="time">{{ stop.buses[0].minutes_to_departure }} minutes</p>
+                <p>To {{ stop.buses[0].destination }}</p>
+                <p class="time">{{ stop.buses[0].minutes_to_departure }} minutes away</p>
               </div>
               <h4 class="show-more">Show more</h4>
-              <div class="spacer"></div>
             </div>
             </a>
             <div class="bus-list" id="{{ loop.index }}">
@@ -49,11 +40,11 @@
                 {% for bus in stop.buses[1:] %}
                   <li class="bus">
                     <div class="service">
-                      <h4>{{ bus.service|replace("&nbsp;", "") }}</h4>
+                      <h4>{{ bus.service }}</h4>
                     </div>
                     <div class="businfo">
-                      <p>To {{ bus.destination|replace("&nbsp;", "") }}</p>
-                      <p class="time">{{ bus.minutes_to_departure }} minutes</p>
+                      <p>To {{ bus.destination }}</p>
+                      <p class="time">{{ bus.minutes_to_departure }} minutes away</p>
                     </div>
                   </li>
                 {% endfor %}
@@ -68,9 +59,7 @@
     {% else %}
       <li>
         <div class="details">
-          <div class="stopname">
-            <h2>{{ stop['name'] }}</h2>
-          </div>
+          <h2 class="stopname">{{ stop['name'] }}</h2>
           <div class="location"> 
             <h4>{{ stop['distance'] }} metres away</h4>
           </div>
@@ -86,11 +75,11 @@
 </section>
 
 {% if more == True %}
-<a onclick="offset = loadMore(offset);" id="load-more">
 <section id="load-more">
-  <p><h3>Tap to load more</h4>
-</section>
+<a onclick="offset = loadMore(offset);">
+  <h3>Tap to load more</h3>
 </a>
+</section>
 {% endif %}
 
 <section id="postcode-instead">
@@ -116,16 +105,13 @@
 function toggle_visibility(id) 
 {
   var e = document.getElementById(id);
-  var b = document.getElementById("arrow-" + id);
   if(e.style.display == 'block')
   {
     e.style.display = 'none';
-    b.className = 'show-more';
   }
   else
   {
     e.style.display = 'block';
-    b.className = 'show-more-expanded';   
   }
 }
 

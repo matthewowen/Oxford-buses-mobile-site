@@ -21,61 +21,67 @@ function createStops(stops)
    var h="";
 
    // enter the basic information about the stop
-   if (obj.buses.length > 1) 
-   {
-     h += "<a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + index + "');\">";
-     h += "            <div class=\"show-more\" id=\"arrow-" + index + "\">";
-     h += "            <\/div>";
-   } 
-   h += "              <div class=\"details\">";
-   h += "                <h2>" + obj.name + "<\/h2>";
-   h += "                <h3>" + obj.distance + " metres away<\/h3>";
-
    // if there are some buses, start building their info
    if (obj.buses.length > 0)
     {
+      h += "          <a class =\"details\" href=\"\/stop\/" + obj.atco + "\" title=\"More about {{ stop.name }}\">";
+      h += "            <h2 class=\"stopname\">" + obj.name + "<\/h2>";
+      h += "            <div class=\"location\">";
+      h += "            <h4>" + obj.distance + " metres away<\/h4>";
+      h += "            <h4 class=\"show-map\">Show on map<\/h4>";
+      h += "            <\/div>";
+      h += "            <div class=\"spacer\"><\/div>";
+      h += "          <\/a>";
+
       // define how we build the first list item's info
       function buildFirstItem(item)
       {
-        h += "<p><span class=\"label\">Next bus: <\/span>" + obj.buses[item].service + "to " + obj.buses[item].destination + " - " + obj.buses[0].minutes_to_departure + " minutes away<\/p>";
+        h += "          <div class=\"buses\">";
+        h += "            <a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + index + "');\">";
+        h += "            <div class=\"nextbus\">";
+        h += "              <div class=\"service\">";
+        h += "                <h4>" + obj.buses[item].service + "<\/h4>";
+        h += "              <\/div>";
+        h += "              <div class=\"businfo\">";
+        h += "                <p>To " + obj.buses[0].destination + "<\/p>";
+        h += "                <p class=\"time\">" + obj.buses[item].minutes_to_departure + " minutes away<\/p>";
+        h += "              <\/div>";
+        h += "              <h4 class=\"show-more\">Show more<\/h4>";
+        h += "            <\/div>";
+        h += "            <\/a>";
+        h += "            <div class=\"bus-list\" id=\"" + index + "\">";
+        h += "            <h4>Later buses:<\/h4>";
+        h += "            <ul>";
       }
-              
-      // if there's only one bus, just put that info in
-      if (obj.buses.length == 1)
+
+      for (item in obj.buses)
       {
-        buildFirstItem(0)
-      }
-      // if there are multiple, build them all out
-      else
-      {
-        for (item in obj.buses)
+        // if it is the first bus, build it out as the first bus and start the list of later buses
+        if (item == 0)
         {
-          // if it is the first bus, build it out as the first bus and start the list of later buses
-          if (item == 0)
-          {
-            buildFirstItem(item)
-            h += "              <\/div>";
-            h += "            <h4>Tap to show later buses<\/h4>";
-            h += "          <ul class=\"bus-list\" id=\"" + index + "\">";
-          }
-          // for the other buses, build their info
-          else
-          {
-            h += "              <li class=\"bus\">";
-            h += "                <p class=\"service\">" + obj.buses[item].service + "to " + obj.buses[item].destination + "<\/p>";
-            h += "                <p class=\"time\">" + obj.buses[item].minutes_to_departure + " minutes away<\/p>";
-            h += "              <\/li>";
-          }
-          // close the list
+          buildFirstItem(item)
         }
-        h += "<\/ul>";
+        // for the other buses, build their info
+        else
+        {
+          h += "                  <li class=\"bus\">";
+          h += "                    <div class=\"service\">";
+          h += "                      <h4>" + obj.buses[item].service + "<\/h4>";
+          h += "                    <\/div>";
+          h += "                    <div class=\"businfo\">";
+          h += "                      <p>To " + obj.buses[item].destination + "<\/p>";
+          h += "                      <p class=\"time\">" + obj.buses[item].minutes_to_departure + " minutes away<\/p>";
+          h += "                    <\/div>";
+          h += "                  <\/li>";
+        }
       }
-    } 
-    // if there were multiple buses, close the expand link
-    if (obj.buses.length > 1)
-    {           
-      h += "<\/a>";
-    }      
+        // close the list
+        h += "                  <\/ul>";
+        h += "              <div class=\"spacer\"><\/div>";
+        h += "            <\/div>";
+        h += "          <\/div>";
+      
+    }   
     // put the HTML we've built inside the list item  
     i.innerHTML = h
     // put the list item on the list
