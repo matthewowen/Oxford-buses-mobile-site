@@ -46,7 +46,7 @@ function createStops(stops)
         h += "                <p>To " + obj.buses[0].destination + "<\/p>";
         h += "                <p class=\"time\">" + obj.buses[item].minutes_to_departure + " minutes away<\/p>";
         h += "              <\/div>";
-        h += "              <h4 class=\"show-more\">Show more<\/h4>";
+        h += "              <h4 class=\"show-more\">Show later buses<\/h4>";
         h += "            <\/div>";
         h += "            <\/a>";
         h += "            <div class=\"bus-list\" id=\"" + index + "\">";

@@ -1,7 +1,7 @@
 html, body {
 	font-family: Arial, Sans-serif;
 	color: #050505;
-	width: 100%;
+	min-width: 320px;
 	height: 100%;	
 	background-color: #FFFAFA;
 }
@@ -39,17 +39,17 @@ footer {
 }
 
 div.show-more {
-	height: 35px;
-	width: 35px;
-	margin: 10px 10px 0 0;
+	height: 2em;
+	width: 2em;
+	margin: 0.6em 0.6em 0 0;
 	background-image: url("/static/arrow.png");
 	float: right;
 }
 
 div.show-more-expanded {
-	height: 35px;
-	width: 35px;
-	margin: 10px 10px 0 0;
+	height: 2em;
+	width: 2em;
+	margin: 0.6em 0.6em 0 0;
 	background-image: url("/static/arrow-down.png");
 	float: right;
 }
@@ -60,7 +60,7 @@ a.details, div.details {
 }
 
 h2.stopname {
-	width: 58%;
+	width: 55%;
 	min-height: 2.7em;
 	padding: 2%;
 	float: left;
@@ -77,8 +77,8 @@ div.location, div.stop-next-bus {
 	min-height: 2.7em;
 	/*width: 47%;
 	padding: 2%;*/
-	width: 35%;
-	padding-top: 0.5em;
+	width: 40%;
+	padding-top: 0.6em;
 }
 
 div.stop-next-bus {
@@ -91,7 +91,7 @@ div.stop-next-bus {
 div.buses {
 	border-top: 1px solid #808080;
 	clear: both;
-	padding: 5px;
+	padding: 0.2em;
 }
 
 div.spacer {
@@ -99,11 +99,11 @@ div.spacer {
 }
 
 div.nextbus {
-	min-height: 50px;
+	min-height: 3em;
 }
 
 div.stop-next-bus div.businfo {
-	width: 100px;
+	width: 6em;
 }
 
 div.info {
@@ -123,13 +123,15 @@ li {
 	list-style: none;
 	clear: both;
 	border: 2px solid black;
+	border-left: none;
+	border-right: none;
 }
 
 li.bus {
 	padding: 0.2em;
 	border: none;
 	background-image: none;
-	padding-top: 10px;
+	padding-top: 0.6em;
 }
 
 #about li {
@@ -179,35 +181,33 @@ footer h4 {
 h4.show-more {
 	float: right;
 	background-color: #808080;
-	margin-right: 10px;
-	padding: 5px;
+	padding: 0.3em;
 	-moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
 	border-radius: 0.3em;
 	border: 1px solid black;
-	margin-top: 0.5em;
+	margin-top: 0.6em;
 	color: white;
 }
 
 h4.show-map {
 	background-color: #808080;
-	padding: 5px;
+	padding: 0.3em;
 	-moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
 	border-radius: 0.3em;
 	border: 1px solid black;
-	margin-top: 0.5em;
+	margin-top: 0.6em;
 	text-align: center;
 	color: white;
 }
 
 .location h4 {
-	float: right;
-	margin-right: 15px;
+	margin-right: 2%;
 }
 
 p {
-	margin:0.2em 0 0;
+	margin: 0.2em 0 0;
 }
 
 #about p {
@@ -224,7 +224,7 @@ a {
 }
 
 h4.buses-jump {
-	padding: 10px 0;
+	padding: 0.6em 0;
 	border-top: 1px solid black;
 	text-align: center;
 }
@@ -267,11 +267,11 @@ form {
 
 #submit {
 	display: block;
-	margin: 10px 0 0 4.5em;
+	margin: 0.6em 0 0 4.5em;
 }
 
 #postcode-instead{
-	padding: 0.5em;
+	padding: 0.6em;
 }
 
 .ff {
@@ -285,8 +285,8 @@ form {
 
 #load-more{
 	background-color: #808080;
-	margin: 1em 0.5em 0;
-	padding: 0.5em;
+	margin: 1em 0.6em 0;
+	padding: 0.6em;
 	border: 1px solid black;
 	-moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
