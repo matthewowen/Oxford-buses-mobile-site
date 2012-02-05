@@ -60,7 +60,7 @@ a.details, div.details {
 }
 
 h2.stopname {
-	width: 45%;
+	width: 58%;
 	min-height: 2.7em;
 	padding: 2%;
 	float: left;
@@ -68,10 +68,23 @@ h2.stopname {
 	background-color: #808080;
 }
 
-div.location, div.stop-next-bus {
-	float: left;
-	min-height: 2.7em;
+h2.info {
 	width: 45%;
+}
+
+div.location, div.stop-next-bus {
+	float: right;
+	min-height: 2.7em;
+	/*width: 47%;
+	padding: 2%;*/
+	width: 35%;
+	padding-top: 0.5em;
+}
+
+div.stop-next-bus {
+	float: right;
+	min-height: 2.7em;
+	width: 47%;
 	padding: 2%;
 }
 
@@ -109,7 +122,7 @@ ul {
 li {
 	list-style: none;
 	clear: both;
-	border: 1px solid black;
+	border: 2px solid black;
 }
 
 li.bus {
@@ -178,7 +191,6 @@ h4.show-more {
 
 h4.show-map {
 	background-color: #808080;
-	margin-right: 10px;
 	padding: 5px;
 	-moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
@@ -187,6 +199,11 @@ h4.show-map {
 	margin-top: 0.5em;
 	text-align: center;
 	color: white;
+}
+
+.location h4 {
+	float: right;
+	margin-right: 15px;
 }
 
 p {
