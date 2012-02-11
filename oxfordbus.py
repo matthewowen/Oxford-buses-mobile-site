@@ -106,7 +106,7 @@ def stops(latitude, longitude):
 	loc_info = get_stops(latitude, longitude, 0)
 	options = loc_info[0]
 	more = loc_info[-1]
-	return render_template('stop_list.html', stop_list=options, more=more)
+	return render_template('stop_list.html', stop_list=options, more=more, userlat=latitude, userlong=longitude)
 
 @app.route('/ajax/stops/<latitude>+<longitude>/<int:offset>')
 def ajax_stops(latitude, longitude, offset):

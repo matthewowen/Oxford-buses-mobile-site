@@ -12,7 +12,7 @@
   {% for stop in stop_list %}
     {% if stop['buses'] %}
       <li>
-          <a class ="details" href="/stop/{{ stop.atco }}" title="More about {{ stop.name }}">
+          <a class ="details" href="/stop/{{ stop.atco }}?userlat={{ userlat }}&amp;userlong={{ userlong }}" title="More about {{ stop.name }}">
             <h2 class="stopname">{{ stop['name'] }}</h2>
             <div class="location">
             <h4>{{ stop['distance'] }} metres away</h4>
@@ -58,7 +58,7 @@
       </li>
     {% else %}
       <li>
-        <a class="details" href="/stop/{{ stop.atco }}" title="More about {{ stop.name }}">
+        <a class="details" href="/stop/{{ stop.atco }}?userlat={{ userlat }}&amp;userlong={{ userlong }}" title="More about {{ stop.name }}">
           <h2 class="stopname">{{ stop['name'] }}</h2>
           <div class="location"> 
             <h4>{{ stop['distance'] }} metres away</h4>
@@ -124,6 +124,11 @@ for(var i=0; i<collection.length; i++)
 </script>
 
 {% if more == True %}
+<script type="text/javascript">
+var userlat = {{ userlat }};
+var userlong = {{ userlong }};
+</script>
+
 <script src="/static/js/load-more.js"></script>
 {% endif %}
 {% endblock %}

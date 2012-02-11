@@ -21,7 +21,7 @@ function createStops(stops)
    var h="";
 
    // enter the basic information about the stop
-    h += "          <a class =\"details\" href=\"\/stop\/" + obj.atco + "\" title=\"More about {{ stop.name }}\">";
+    h += "          <a class =\"details\" href=\"\/stop\/" + obj.atco + "?userlat=" + userlat + "&amp;userlong=" + userlong + "\" title=\"More about {{ stop.name }}\">";
     h += "            <h2 class=\"stopname\">" + obj.name + "<\/h2>";
     h += "            <div class=\"location\">";
     h += "            <h4>" + obj.distance + " metres away<\/h4>";
@@ -128,7 +128,7 @@ function loadMore(offset)
       if (httpRequest.status === 200) 
       {
         info = JSON.parse(httpRequest.responseText);
-        createStops(info.stops);
+        createStops(info.stops, userlat, userlong);
         // hide the load-more if there aren't any more
         if (info.more == false)
         {

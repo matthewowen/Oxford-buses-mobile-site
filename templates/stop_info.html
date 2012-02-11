@@ -67,7 +67,6 @@ function initialize() {
 	theStop = new google.maps.LatLng({{ stop.latitude }}, {{ stop.longitude }});
 	var stopIcon = new google.maps.MarkerImage("/static/bus.png");
 	var userIcon = new google.maps.MarkerImage("/static/person.png");
-	theUser = new google.maps.LatLng({{ userlat }}, {{ userlong }});
 
 	var myOptions = {
 		center: theStop,
@@ -84,13 +83,17 @@ function initialize() {
       icon: stopIcon,
       title: "{{ stop.name }}"
     })
+
+    {% if userlat and userlong %}
+    	theUser = new google.maps.LatLng({{ userlat }}, {{ userlong }});
     
-    var userMarker = new google.maps.Marker({
-      position: theUser,
-   	  map: map,
-      icon: userIcon,
-      title: "You are here"
-    })
+	    var userMarker = new google.maps.Marker({
+	      position: theUser,
+	   	  map: map,
+	      icon: userIcon,
+	      title: "You are here"
+	    })
+	{% endif %}
 
     var bounds = new google.maps.LatLngBounds();
     bounds.extend(theStop)
