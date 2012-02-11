@@ -58,13 +58,14 @@
       </li>
     {% else %}
       <li>
-        <div class="details">
+        <a class="details" href="/stop/{{ stop.atco }}" title="More about {{ stop.name }}">
           <h2 class="stopname">{{ stop['name'] }}</h2>
           <div class="location"> 
             <h4>{{ stop['distance'] }} metres away</h4>
+            <h4 class="show-map">Show on map</h4>
           </div>
           <div class="spacer"></div>
-        </div>
+        </a>
         <div class="buses">
         <p>No more buses in the next hour</p>
         </div>

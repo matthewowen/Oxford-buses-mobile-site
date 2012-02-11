@@ -21,18 +21,18 @@ function createStops(stops)
    var h="";
 
    // enter the basic information about the stop
-   // if there are some buses, start building their info
-   if (obj.buses.length > 0)
+    h += "          <a class =\"details\" href=\"\/stop\/" + obj.atco + "\" title=\"More about {{ stop.name }}\">";
+    h += "            <h2 class=\"stopname\">" + obj.name + "<\/h2>";
+    h += "            <div class=\"location\">";
+    h += "            <h4>" + obj.distance + " metres away<\/h4>";
+    h += "            <h4 class=\"show-map\">Show on map<\/h4>";
+    h += "            <\/div>";
+    h += "            <div class=\"spacer\"><\/div>";
+    h += "          <\/a>";
+    
+    // if there are some buses, start building their info
+    if (obj.buses.length > 0)
     {
-      h += "          <a class =\"details\" href=\"\/stop\/" + obj.atco + "\" title=\"More about {{ stop.name }}\">";
-      h += "            <h2 class=\"stopname\">" + obj.name + "<\/h2>";
-      h += "            <div class=\"location\">";
-      h += "            <h4>" + obj.distance + " metres away<\/h4>";
-      h += "            <h4 class=\"show-map\">Show on map<\/h4>";
-      h += "            <\/div>";
-      h += "            <div class=\"spacer\"><\/div>";
-      h += "          <\/a>";
-
       // define how we build the first list item's info
       function buildFirstItem(item)
       {
@@ -79,9 +79,15 @@ function createStops(stops)
         h += "                  <\/ul>";
         h += "              <div class=\"spacer\"><\/div>";
         h += "            <\/div>";
-        h += "          <\/div>";
-      
+        h += "          <\/div>";    
     }   
+
+    else {
+      h += "          <div class=\"buses\">";
+      h += "          <p>No more buses in the next hour<\/p>";
+      h += "          <\/div>";
+    }
+
     // put the HTML we've built inside the list item  
     i.innerHTML = h
     // put the list item on the list

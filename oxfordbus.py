@@ -138,7 +138,10 @@ def stop_info(stop_id):
 
 	stop_details = {'name': name, 'latitude': stop_info['Latitude'], 'longitude': stop_info['Longitude'], 'buses': buses}
 	
-	return render_template('stop_info.html', stop=stop_details)
+	userlat = request.args.get('userlat', '')
+	userlong = request.args.get('userlong', '')
+
+	return render_template('stop_info.html', stop=stop_details, userlat=userlat, userlong=userlong)
 
 @app.route('/about')
 def about():
