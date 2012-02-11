@@ -106,7 +106,7 @@ def stops(latitude, longitude):
 	loc_info = get_stops(latitude, longitude, 0)
 	options = loc_info[0]
 	more = loc_info[-1]
-	return render_template('stop_list.html', stop_list=options, more=more)
+	return render_template('stop_list.html', stop_list=options, more=more, userlat=latitude, userlong=longitude)
 
 @app.route('/ajax/stops/<latitude>+<longitude>/<int:offset>')
 def ajax_stops(latitude, longitude, offset):
@@ -138,7 +138,10 @@ def stop_info(stop_id):
 
 	stop_details = {'name': name, 'latitude': stop_info['Latitude'], 'longitude': stop_info['Longitude'], 'buses': buses}
 	
-	return render_template('stop_info.html', stop=stop_details)
+	userlat = request.args.get('userlat', '')
+	userlong = request.args.get('userlong', '')
+
+	return render_template('stop_info.html', stop=stop_details, userlat=userlat, userlong=userlong)
 
 @app.route('/about')
 def about():

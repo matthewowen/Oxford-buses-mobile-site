@@ -13,6 +13,7 @@
 <div class="details">
 	<h2 class="info stopname">{{ stop['name'] }}</h2>
 	<div class="stop-next-bus">
+	{% if stop.buses %}
 	<div class="service">
 		<h4>{{ stop.buses[0].service|replace("&nbsp;", "") }}</h4>
 	</div>
@@ -20,9 +21,14 @@
 	<p>{{ stop.buses[0].destination|replace("&nbsp;", "") }}</p>
 	<p class="time">{{ stop.buses[0].minutes_to_departure }} minutes</p>
 	</div>
+	{% else %}
+	<h4>No buses in the next hour</h4>
+	{% endif %}
 	</div>
 	<div class="spacer"></div>
+	{% if stop.buses %}
 	<a href="#buses" class="buses-jump"><h4 class="buses-jump">Tap to jump to later buses</h4></a>
+	{% endif %}
 </div>
 
 <div id="map_canvas" style="width: 100%; height: 300px"></div>
@@ -58,9 +64,12 @@
 
 <script type="text/javascript">
 function initialize() {
-	myLatLng = new google.maps.LatLng({{ stop.latitude }}, {{ stop.longitude }});
+	theStop = new google.maps.LatLng({{ stop.latitude }}, {{ stop.longitude }});
+	var stopIcon = new google.maps.MarkerImage("/static/bus.png");
+	var userIcon = new google.maps.MarkerImage("/static/person.png");
+
 	var myOptions = {
-		center: myLatLng,
+		center: theStop,
 		zoom: 16,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
@@ -68,11 +77,28 @@ function initialize() {
 	var map = new google.maps.Map(document.getElementById("map_canvas"),
 	    myOptions);
 
-	var marker = new google.maps.Marker({
-      position: myLatLng,
+	var stopMarker = new google.maps.Marker({
+      position: theStop,
       map: map,
+      icon: stopIcon,
       title: "{{ stop.name }}"
-  })
+    })
+
+    {% if userlat and userlong %}
+    	theUser = new google.maps.LatLng({{ userlat }}, {{ userlong }});
+    
+	    var userMarker = new google.maps.Marker({
+	      position: theUser,
+	   	  map: map,
+	      icon: userIcon,
+	      title: "You are here"
+	    })
+	{% endif %}
+
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(theStop)
+    bounds.extend(theUser)
+    map.fitBounds(bounds)
 }  
 
 initialize();
