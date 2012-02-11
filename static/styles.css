@@ -59,6 +59,25 @@ a.details, div.details {
 	background-color: #FFFAFA;
 }
 
+div#stopinfo {
+	width: 45%;
+	min-height: 6em;
+	padding: 2%;
+	float: left;
+	color: white;
+	background-color: #808080;
+}
+
+h4#duration {
+	color: white;
+	float: left;
+	background-color: #808080;
+}
+
+h2.info {
+	width: 45%;
+}
+
 h2.stopname {
 	width: 55%;
 	min-height: 2.7em;
@@ -68,22 +87,16 @@ h2.stopname {
 	background-color: #808080;
 }
 
-h2.info {
-	width: 45%;
-}
-
 div.location, div.stop-next-bus {
 	float: right;
 	min-height: 2.7em;
-	/*width: 47%;
-	padding: 2%;*/
 	width: 40%;
 	padding-top: 0.6em;
 }
 
 div.stop-next-bus {
 	float: right;
-	min-height: 2.7em;
+	min-height: 4em;
 	width: 47%;
 	padding: 2%;
 }
@@ -206,6 +219,23 @@ h4.show-map {
 	margin-right: 2%;
 }
 
+h4.buses-jump {
+	clear: both;
+	background-color: #808080;
+	padding: 0.3em;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	border: 1px solid black;
+	margin-top: 0.6em;
+	text-align: center;
+	color: white;
+}
+
+a.buses-jump {
+	text-decoration: none;
+}
+
 p {
 	margin: 0.2em 0 0;
 }
@@ -221,12 +251,6 @@ span.label {
 a {
 	text-decoration: underline;
 	color: black;
-}
-
-h4.buses-jump {
-	padding: 0.6em 0;
-	border-top: 1px solid black;
-	text-align: center;
 }
 
 div.service {

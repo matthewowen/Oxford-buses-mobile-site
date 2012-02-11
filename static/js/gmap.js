@@ -45,10 +45,12 @@ function initialize(stoplat, stoplong, userlat, userlong) {
 	    directionsService.route(request, function(response, status) {
 	    	if (status == google.maps.DirectionsStatus.OK) {
 	    		directionsDisplay.setDirections(response);
+	    		duration = response.routes[0].legs[0].duration.text;
+	    		document.getElementById("duration").innerHTML = "Around " + duration + " walk away";
 	    	}
 	    });
 
-	    directionsDisplay.setMap(map)
+	    directionsDisplay.setMap(map);
 
 	}
 
