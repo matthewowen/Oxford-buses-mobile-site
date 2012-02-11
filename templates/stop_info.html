@@ -61,48 +61,8 @@
 {% endblock %}
 
 {% block script %}
-
 <script type="text/javascript">
-function initialize() {
-	theStop = new google.maps.LatLng({{ stop.latitude }}, {{ stop.longitude }});
-	var stopIcon = new google.maps.MarkerImage("/static/bus.png");
-	var userIcon = new google.maps.MarkerImage("/static/person.png");
-
-	var myOptions = {
-		center: theStop,
-		zoom: 16,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-
-	var map = new google.maps.Map(document.getElementById("map_canvas"),
-	    myOptions);
-
-	var stopMarker = new google.maps.Marker({
-      position: theStop,
-      map: map,
-      icon: stopIcon,
-      title: "{{ stop.name }}"
-    })
-
-    {% if userlat and userlong %}
-    	theUser = new google.maps.LatLng({{ userlat }}, {{ userlong }});
-    
-	    var userMarker = new google.maps.Marker({
-	      position: theUser,
-	   	  map: map,
-	      icon: userIcon,
-	      title: "You are here"
-	    })
-	{% endif %}
-
-    var bounds = new google.maps.LatLngBounds();
-    bounds.extend(theStop)
-    bounds.extend(theUser)
-    map.fitBounds(bounds)
-}  
-
-initialize();
-
+var stoplat = {{ stop.latitude }}; var stoplong = {{ stop.longitude }}; var userlat = {{ userlat }}; var userlong = {{ userlong }};
 </script>
-
+<script src="/static/js/gmap.js"></script>
 {% endblock %}
