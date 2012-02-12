@@ -1,4 +1,4 @@
-from busscraper import stop, postcode
+from busscraper import stop, service
 
 import httplib2
 
@@ -19,6 +19,10 @@ DATABASE = 'stopsdb'
 
 def connect_db():
     return sqlite3.connect(DATABASE)
+
+def service_info(service_id, destination):
+	info = service('2', service_id, destination, 'oxfordshire', '35')
+	return info
 
 def get_stops(latitude, longitude, offset):
 	# get the nearby stops from the database
@@ -118,8 +122,12 @@ def ajax_stops(latitude, longitude, offset):
 
 @app.route('/stop/<stop_id>')
 def stop_info(stop_id):
-	stop_info = query_db('SELECT * FROM stops WHERE AtcoCode = ?;', [stop_id])[0]
-	
+	try:
+		stop_info = query_db('SELECT * FROM stops WHERE AtcoCode = ?;', [stop_id])[0]
+	except IndexError:
+		argname = request.args.get('name', '')
+		stop_info = query_db('SELECT * FROM stops WHERE CommonName = ?;', [argname])[0]
+
 	atco = stop_info["AtcoCode"]
 
 	buses = stop(atco, "oxfordshire")[:10]
@@ -142,6 +150,12 @@ def stop_info(stop_id):
 	userlong = request.args.get('userlong', '')
 
 	return render_template('stop_info.html', stop=stop_details, userlat=userlat, userlong=userlong)
+
+@app.route('/service/<service_id>/<destination>')
+def service_page(service_id, destination):
+	service_stops = service_info(service_id, destination)
+	
+	return render_template('service.html', stops=service_stops, destination=destination, service_id=service_id)
 
 @app.route('/about')
 def about():

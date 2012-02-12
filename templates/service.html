@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>OxBus | Stops for {{ service_id }} towards {{ destination }}</title>
+{% endblock %}
+
+{% block body %}
+<section id="stop-content">
+<div class="details">
+	<div id="serviceinfo">
+	<h2>{{ service_id }} towards {{ destination }}</h2>
+	</div>
+</div>
+
+<div class="stops">
+<a name="buses"></a>
+<h4>Stops</h4>
+<ul>
+    {% for stop in stops %}
+      <li>
+      	<a href="/stop/{{ stop.stop_id }}">
+		<h4>{{ stop.stop_name }}</h4>
+		</a>
+      </li>
+    {% endfor %}
+</ul>
+<div class="spacer"></div>
+<div id="directions"
+</div>
+</div>
+
+</section>
+{% endblock %}
