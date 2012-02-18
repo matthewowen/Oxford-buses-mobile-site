@@ -25,7 +25,7 @@ function createStops(stops)
     h += "            <h2 class=\"stopname\">" + obj.name + "<\/h2>";
     h += "            <div class=\"location\">";
     h += "            <h4>" + obj.distance + " metres away<\/h4>";
-    h += "            <h4 class=\"show-map\">Show on map<\/h4>";
+    h += "            <h4 class=\"show-map button\">Show on map<\/h4>";
     h += "            <\/div>";
     h += "            <div class=\"spacer\"><\/div>";
     h += "          <\/a>";
@@ -36,7 +36,7 @@ function createStops(stops)
       // define how we build the first list item's info
       function buildFirstItem(item)
       {
-        h += "          <div class=\"buses\">";
+        h += "          <section class=\"buses\">";
         h += "            <a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + index + "');\">";
         h += "            <div class=\"nextbus\">";
         h += "              <div class=\"service\">";
@@ -46,7 +46,7 @@ function createStops(stops)
         h += "                <p>To " + obj.buses[0].destination + "<\/p>";
         h += "                <p class=\"time\">" + obj.buses[item].minutes_to_departure + " minutes away<\/p>";
         h += "              <\/div>";
-        h += "              <h4 class=\"show-more\">Show more<\/h4>";
+        h += "              <h4 class=\"show-more button\">Show more<\/h4>";
         h += "            <\/div>";
         h += "            <\/a>";
         h += "            <div class=\"bus-list\" id=\"" + index + "\">";
@@ -79,13 +79,13 @@ function createStops(stops)
         h += "                  <\/ul>";
         h += "              <div class=\"spacer\"><\/div>";
         h += "            <\/div>";
-        h += "          <\/div>";    
+        h += "          <\/section>";    
     }   
 
     else {
-      h += "          <div class=\"buses\">";
+      h += "          <section class=\"buses\">";
       h += "          <p>No more buses in the next hour<\/p>";
-      h += "          <\/div>";
+      h += "          <\/section>";
     }
 
     // put the HTML we've built inside the list item  
@@ -108,7 +108,7 @@ function createStops(stops)
     collection[i].style.display = 'none';
   }
   // hide the loading gif
-  l.setAttribute("class", "");
+  l.setAttribute("class", "button");
 }
 
 // the function that gets called when clicked. variables live outside as they need to maintain global scope
@@ -116,7 +116,7 @@ function loadMore(offset)
 {
   // get the load-more section, show a loading gif there
   l = document.getElementById("load-more");
-  l.setAttribute("class", "loading");
+  l.setAttribute("class", "button loading");
   // open the request, grab the relevant stops
   httpRequest=new XMLHttpRequest();
   httpRequest.open("GET", "/ajax" + location.pathname + "/" + offset, true);

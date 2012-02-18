@@ -24,7 +24,7 @@
 	<p>{{ stop.buses[0].destination|replace("&nbsp;", "") }}</p>
 	<p class="time">{{ stop.buses[0].minutes_to_departure }} minutes</p>
 	</div>
-	<a href="#buses" class="buses-jump"><h4 class="buses-jump">Jump to later buses</h4></a>
+	<a href="#buses" class="buses-jump"><h4 class="buses-jump button">Jump to later buses</h4></a>
 	{% else %}
 	<h4>No buses in the next hour</h4>
 	{% endif %}

@@ -16,11 +16,11 @@
             <h2 class="stopname">{{ stop['name'] }}</h2>
             <div class="location">
             <h4>{{ stop['distance'] }} metres away</h4>
-            <h4 class="show-map">Show on map</h4>
+            <h4 class="show-map button">Show on map</h4>
             </div>
             <div class="spacer"></div>
           </a>
-          <div class="buses">
+          <section class="buses">
             <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
             <div class="nextbus">
               <div class="service">
@@ -30,7 +30,7 @@
                 <p>To {{ stop.buses[0].destination }}</p>
                 <p class="time">{{ stop.buses[0].minutes_to_departure }} minutes away</p>
               </div>
-              <h4 class="show-more">Show more</h4>
+              <h4 class="show-more button">Show more</h4>
             </div>
             </a>
             <div class="bus-list" id="{{ loop.index }}">
@@ -54,7 +54,7 @@
             </ul>
             <div class="spacer"></div>
             </div>
-          </div>
+          </section>
       </li>
     {% else %}
       <li>
@@ -62,13 +62,13 @@
           <h2 class="stopname">{{ stop['name'] }}</h2>
           <div class="location"> 
             <h4>{{ stop['distance'] }} metres away</h4>
-            <h4 class="show-map">Show on map</h4>
+            <h4 class="show-map button">Show on map</h4>
           </div>
           <div class="spacer"></div>
         </a>
-        <div class="buses">
+        <section class="buses">
         <p>No more buses in the next hour</p>
-        </div>
+        </section>
       </li>
     {% endif %}
   {% endfor %}
@@ -76,15 +76,18 @@
 </section>
 
 {% if more == True %}
-<section id="load-more">
+<div id="load-more" class="button">
 <a onclick="offset = loadMore(offset);">
-  <h3>Tap to load more</h3>
+  <h4>Tap to load more</h4>
 </a>
-</section>
+</div>
 {% endif %}
 
 <section id="postcode-instead">
-  <p>Results don't look right? <a href="/postcode/" title="search by postcode">Search by postcode instead...</a></p>
+  <h4>Results don't look right?</h4> 
+  <a href="/postcode/" title="search by postcode">
+    <h4 class="button">Search by postcode instead...</h4>
+  </a>
 </section>
 {% else %}
 <section id="location">
