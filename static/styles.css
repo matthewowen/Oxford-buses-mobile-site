@@ -7,7 +7,7 @@ html, body {
 	font-family: Arial, Sans-serif;
 	color: #050505;
 	min-width: 340px;
-	height: 100%;	
+	min-height: 100%;	
 	background-color: #FFFAFA;
 }
 
@@ -15,7 +15,7 @@ header {
 	background-color: #5CACEE;
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#5CACEE), to(#4F94CD));
 	width: 100%;
-	height: 2em
+	height: 2em;
 	overflow: hidden;
 	text-align: center;
 }
@@ -26,7 +26,10 @@ footer {
 	width: 100%;
 	height: 1.8em;
 	overflow: hidden;
-	z-index: 1;
+}
+
+article {
+	min-height: 10em;
 }
 
 a.details, div.details {
