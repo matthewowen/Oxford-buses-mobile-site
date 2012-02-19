@@ -39,30 +39,56 @@ def get_stops(latitude, longitude, offset):
 		atco = bus_stop["AtcoCode"]
 
 		# if we've not already got it in redis, go and get the stop info
-		if not r.get('atco'):
+		if not r.exists(atco):
 			# scrape the info - just take the first ten buses
 			buses = stop(atco, "oxfordshire")[:10]
-
-			name = bus_stop["CommonName"]
-			# sometimes landmark is useful, sometimes it just duplicates common name
-			landmark = bus_stop["Landmark"]
-			if name == landmark:
-				pass
-			else:
-				names = [name, landmark]
-				name = " ".join(names)
-
-			# this isn't strictly accurate, but it is near enough
-			distance = bus_stop["dist"]
-			distance = distance * 1000
-			distance = int(distance)
-
-			stop_details = {'name': name, 'distance': distance, 'buses': buses, 'atco': atco}
 			# set it in redis for next time
-			r.set('atco', stop_details)
-		# otherwise, just grab it from redis
+			"""
+			for each stop, a list identified by atco. contains integers
+			each integer allows us to find a particular bus incl. time, destination, service
+			"""
+			for bus in buses:
+				k = r.incr('bus.id')
+				r.set('bus:%d:service' % (k), bus['service'])
+				r.set('bus:%d:destination' % (k), bus['destination'])
+				r.set('bus:%d:minutes_to_departure' % (k), bus['minutes_to_departure'])
+				r.lpush(atco, k)
+
+		# otherwise, get it from redis
 		else:
-			stop_details = r.get('atco')
+			# list for buses
+			buses = []
+			i = r.llen(atco)
+			# pop 'em off
+			while i > 0:
+				# get the id
+				k = r.lpop(atco)
+				# start a dictionary for the values
+				bus = {}
+				# grab the info
+				bus['service'] = r.get('bus:%s:service' % (k))
+				bus['destination'] = r.get('bus:%s:destination' % (k))
+				bus['minutes_to_departure'] = int(r.get('bus:%s:minutes_to_departure' % (k)))
+				# stick it on the list
+				buses.append(bus)
+				# drop the count
+				i -= 1
+
+		name = bus_stop["CommonName"]
+		# sometimes landmark is useful, sometimes it just duplicates common name
+		landmark = bus_stop["Landmark"]
+		if name == landmark:
+			pass
+		else:
+			names = [name, landmark]
+			name = " ".join(names)
+
+		# this isn't strictly accurate, but it is near enough
+		distance = bus_stop["dist"]
+		distance = distance * 1000
+		distance = int(distance)
+
+		stop_details = {'name': name, 'distance': distance, 'buses': buses, 'atco': atco}
 
 		options.append(stop_details)
 	
