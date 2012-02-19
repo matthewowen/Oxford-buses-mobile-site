@@ -1,14 +1,8 @@
 from busscraper import stop, postcode
 
-import httplib2
+import httplib2, redis
 
-try:
-	import json as simplejson
-except ImportError:
-	try:
-		import simplejson
-	except ImportError:
-		from django.utils import simplejson
+import json as simplejson
 
 from flask import Flask, render_template, url_for, g, redirect, request
 import sqlite3
@@ -16,6 +10,8 @@ import sqlite3
 app = Flask(__name__)
 
 DATABASE = 'stopsdb'
+
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 def connect_db():
     return sqlite3.connect(DATABASE)
@@ -34,23 +30,42 @@ def get_stops(latitude, longitude, offset):
 	else:
 		more = False
 	stop_list = stop_list[offset:u]
-	# run through the new stop list getting the info for each one
+
+	# a list for the stops and their info
 	options = []
+
+	# run through all the stops, getting info and adding to the list
 	for bus_stop in stop_list:
 		atco = bus_stop["AtcoCode"]
-		buses = stop(atco, "oxfordshire")[:10]
-		name = bus_stop["CommonName"]
-		landmark = bus_stop["Landmark"]
-		if name == landmark:
-			pass
+
+		# if we've not already got it in redis, go and get the stop info
+		if not r.get('atco'):
+			# scrape the info - just take the first ten buses
+			buses = stop(atco, "oxfordshire")[:10]
+
+			name = bus_stop["CommonName"]
+			# sometimes landmark is useful, sometimes it just duplicates common name
+			landmark = bus_stop["Landmark"]
+			if name == landmark:
+				pass
+			else:
+				names = [name, landmark]
+				name = " ".join(names)
+
+			# this isn't strictly accurate, but it is near enough
+			distance = bus_stop["dist"]
+			distance = distance * 1000
+			distance = int(distance)
+
+			stop_details = {'name': name, 'distance': distance, 'buses': buses, 'atco': atco}
+			# set it in redis for next time
+			r.set('atco', stop_details)
+		# otherwise, just grab it from redis
 		else:
-			names = [name, landmark]
-			name = " ".join(names)
-		distance = bus_stop["dist"]
-		distance = distance * 1000
-		distance = int(distance)
-		stop_details = {'name': name, 'distance': distance, 'buses': buses, 'atco': atco}
+			stop_details = r.get('atco')
+
 		options.append(stop_details)
+	
 	# return a tuple containing the list of stop options, and whether or not there are more stops
 	return (options, more)
 
