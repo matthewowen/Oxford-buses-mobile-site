@@ -60,19 +60,19 @@ def get_stops(latitude, longitude, offset):
 			buses = []
 			i = r.llen(atco)
 			# pop 'em off
-			while i > 0:
+			for l in range(i):
 				# get the id
-				k = r.lpop(atco)
+				v = r.lindex(atco, l)
 				# start a dictionary for the values
 				bus = {}
 				# grab the info
-				bus['service'] = r.get('bus:%s:service' % (k))
-				bus['destination'] = r.get('bus:%s:destination' % (k))
-				bus['minutes_to_departure'] = int(r.get('bus:%s:minutes_to_departure' % (k)))
+				bus['service'] = r.get('bus:%s:service' % (v))
+				bus['destination'] = r.get('bus:%s:destination' % (v))
+				bus['minutes_to_departure'] = int(r.get('bus:%s:minutes_to_departure' % (v)))
 				# stick it on the list
 				buses.append(bus)
-				# drop the count
-				i -= 1
+			#list is the wrong way round so reverse it
+			buses.reverse()
 
 		name = bus_stop["CommonName"]
 		# sometimes landmark is useful, sometimes it just duplicates common name
