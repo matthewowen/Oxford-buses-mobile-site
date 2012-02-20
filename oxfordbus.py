@@ -4,6 +4,18 @@ import json as simplejson
 
 app = Flask(__name__)
 
+if app.config['DEBUG']:
+    from werkzeug import SharedDataMiddleware
+    import os
+    app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+      '/': os.path.join(os.path.dirname(__file__), 'static')
+    })
+
+if __name__ == '__main__':
+	app.run(host='0.0.0.0', debug=True)
+
+# UTILITIES
+
 @app.before_request
 def before_request():
     g.db = connect_db()
@@ -13,37 +25,25 @@ def teardown_request(exception):
     if hasattr(g, 'db'):
         g.db.close()
 
-@app.route('/postcode/', methods=['GET', 'POST'])
-def enter_location():
-	if request.method == 'POST':
-		postcode = request.form['postcode']
-		postcode = postcode.replace(" ", "")
-		http = httplib2.Http()
-		resp, content = http.request("http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % (postcode), "GET")
-		try:
-			content2 = simplejson.loads(content)
-			results = content2['results']
-			results = results[0]
-			geometry = results['geometry']
-			location = geometry['location']
-			latitude = location['lat']
-			longitude = location['lng']
-			url = "/stops/%s+%s" % (latitude, longitude)
-			return redirect(url)
-		except ValueError:
-			return render_template('enter_postcode_again.html')
-		except IndexError:
-			return render_template('enter_postcode_again.html')
-	else:
-		return render_template('enter_postcode.html')
+# ERRORS, PROBLEMS, STATIC
+
+@app.errorhandler(404)
+def page_not_found(error):
+	return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+	return render_template('500.html'), 500
 
 @app.route('/no-location')
 def no_location():
 	return render_template('no_location.html')
 
-@app.route('/')
-def get_location():
-	return render_template('get_location.html')
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
+# RESULTS
 
 @app.route('/stops/<latitude>+<longitude>')
 def stops(latitude, longitude):
@@ -71,24 +71,27 @@ def stop_info(stop_id):
 
 	return render_template('stop_info.html', stop=v.__dict__, userlat=userlat, userlong=userlong)
 
-@app.route('/about')
-def about():
-	return render_template('about.html')
+# INPUT
 
-@app.errorhandler(404)
-def page_not_found(error):
-	return render_template('404.html'), 404
+@app.route('/postcode/', methods=['GET', 'POST'])
+def enter_location():
+	if request.method == 'POST':
+		postcode = request.form['postcode'].replace(" ", "")
+		http = httplib2.Http()
+		resp, content = http.request("http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % (postcode), "GET")
+		try:
+			d = simplejson.loads(content)
+			latitude = d['results'][0]['geometry']['location']['lat']
+			longitude = d['results'][0]['geometry']['location']['lng']
+			url = "/stops/%s+%s" % (latitude, longitude)
+			return redirect(url)
+		except ValueError:
+			return render_template('enter_postcode_again.html')
+		except IndexError:
+			return render_template('enter_postcode_again.html')
+	else:
+		return render_template('enter_postcode.html')
 
-@app.errorhandler(500)
-def internal_error(error):
-	return render_template('500.html'), 500
-
-if app.config['DEBUG']:
-    from werkzeug import SharedDataMiddleware
-    import os
-    app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-      '/': os.path.join(os.path.dirname(__file__), 'static')
-    })
-
-if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=True)
+@app.route('/')
+def get_location():
+	return render_template('get_location.html')

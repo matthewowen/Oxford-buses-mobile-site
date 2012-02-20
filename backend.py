@@ -11,15 +11,6 @@ r = redis.StrictRedis(host='localhost', port=6379, db=0)
 def connect_db():
     return sqlite3.connect(DATABASE)
 
-@app.before_request
-def before_request():
-    g.db = connect_db()
-
-@app.teardown_request
-def teardown_request(exception):
-    if hasattr(g, 'db'):
-        g.db.close()
-
 def query_db(query, args=(), one=False):
     cur = g.db.execute(query, args)
     rv = [dict((cur.description[idx][0], value)
@@ -32,8 +23,7 @@ class BusStop(object):
 		"""
 		retrieve buses using busscraper.stop
 		add those buses to redis for next time
-		"""
-		
+		"""	
 		# scrape the info - just take the first ten buses
 		buses = stop(self.atco, "oxfordshire")[:10]
 		
@@ -105,13 +95,33 @@ class BusStop(object):
 
 		return buses
 
-	def __init__(self, atco):
+	def __init__(self, atco, **kwargs):
 		self.atco = atco
 		self.buses = self.retrieve_buses()
+		if 'name' in kwargs:
+			self.name = kwargs['name']
+		if 'distance' in kwargs:
+			self.distance = kwargs['distance']
+		if 'latitude' in kwargs:
+			self.latitude = kwargs['latitude']
+		if 'longitude' in kwargs:
+			self.longitude = kwargs['longitude']
+
+def name_joiner(bus_stop):
+	"""
+	passed a bus stop, returns a sensible name for it based on common name and landmark
+	"""
+	if bus_stop["CommonName"] == bus_stop["Landmark"]:
+			name = bus_stop["CommonName"]
+	else:
+		names = [bus_stop["CommonName"], bus_stop["Landmark"]]
+		name = " ".join(names)
+
+	return name
 
 def get_stops(latitude, longitude, offset):
 	"""
-	for a given latitude and longitude and offset (n):
+	for a given latitude, longitude and offset (n):
 		return a list of stops (starting with the nth nearest):
 			for each stop:
 				give info about the stop
@@ -124,36 +134,19 @@ def get_stops(latitude, longitude, offset):
 
 	# use the offset to figure out which stops in the list we're interested in.
 	# if the list has more stops beyond those we're using, set the more variable to be true
-	length = len(stop_list)
-	u = offset + 10
-	if length > u:
+	if len(stop_list) > offset+10:
 		more = True
 	else:
 		more = False
-	stop_list = stop_list[offset:u]
+	stop_list = stop_list[offset:offset+10]
 
 	# a list for the stops and their info
 	options = []
 
 	# run through all the stops, getting info and adding to the list
 	for bus_stop in stop_list:
-
-		v = BusStop(bus_stop["AtcoCode"])
-
-		v.name = bus_stop["CommonName"]
-		
-		# sometimes landmark is useful, sometimes it just duplicates common name
-		landmark = bus_stop["Landmark"]
-		if v.name == landmark:
-			pass
-		else:
-			names = [v.name, landmark]
-			v.name = " ".join(names)
-
-		# this isn't strictly accurate, but it is near enough
-		v.distance = bus_stop["dist"]
-		v.distance = v.distance * 1000
-		v.distance = int(v.distance)
+		# distance isn't strictly accurate, but it is near enough
+		v = BusStop(bus_stop["AtcoCode"], name=name_joiner(bus_stop), distance=int(bus_stop["dist"] * 1000))
 
 		options.append(v.__dict__)
 	
@@ -161,23 +154,10 @@ def get_stops(latitude, longitude, offset):
 	return (options, more)
 
 def get_stop(stop_id):
-	stop_info = query_db('SELECT * FROM stops WHERE AtcoCode = ?;', [stop_id])[0]
-	
-	atco = stop_info["AtcoCode"]
+	"""
+	get the information about a particular stop, given a stop_id (atco)
+	"""
 
-	# create a stop object
-	s = BusStop(bus_stop["AtcoCode"])
-	
-	# add info to it that we got out of the db
-	s.name = stop_info["CommonName"]
-	landmark = stop_info["Landmark"]
-	if name == landmark:
-		pass
-	else:
-		names = [s.name, landmark]
-		s.name = " ".join(names)
+	bus_stop = query_db('SELECT * FROM stops WHERE AtcoCode = ?;', [stop_id])[0]
 
-	s.latitude = stop.info['Latitude']
-	s.longitude = stop.info['Longitude']
-
-	return s
+	return BusStop(bus_stop["AtcoCode"], name=name_joiner(bus_stop), latitude=bus_stop['Latitude'], longitude=bus_stop['Longitude'])
