@@ -4,16 +4,6 @@ import json as simplejson
 
 app = Flask(__name__)
 
-if app.config['DEBUG']:
-    from werkzeug import SharedDataMiddleware
-    import os
-    app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
-      '/': os.path.join(os.path.dirname(__file__), 'static')
-    })
-
-if __name__ == '__main__':
-	app.run(host='0.0.0.0', debug=True)
-
 # UTILITIES
 
 @app.before_request
@@ -95,3 +85,13 @@ def enter_location():
 @app.route('/')
 def get_location():
 	return render_template('get_location.html')
+
+if app.config['DEBUG']:
+    from werkzeug import SharedDataMiddleware
+    import os
+    app.wsgi_app = SharedDataMiddleware(app.wsgi_app, {
+      '/': os.path.join(os.path.dirname(__file__), 'static')
+    })
+
+if __name__ == '__main__':
+	app.run(host='0.0.0.0', debug=True)
