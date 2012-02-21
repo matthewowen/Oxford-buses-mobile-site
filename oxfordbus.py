@@ -53,7 +53,7 @@ def ajax_stops(latitude, longitude, offset):
 @app.route('/stop/<stop_id>')
 def stop_info(stop_id):
 	
-	s = get_stop(s)
+	s = get_stop(stop_id)
 
 	# get the users location (to show on the map)
 	userlat = request.args.get('userlat', '')
