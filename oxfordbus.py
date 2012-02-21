@@ -59,7 +59,7 @@ def stop_info(stop_id):
 	userlat = request.args.get('userlat', '')
 	userlong = request.args.get('userlong', '')
 
-	return render_template('stop_info.html', stop=v.__dict__, userlat=userlat, userlong=userlong)
+	return render_template('stop_info.html', stop=s.__dict__, userlat=userlat, userlong=userlong)
 
 # INPUT
 
