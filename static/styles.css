@@ -204,6 +204,10 @@ a {
 	color: black;
 }
 
+a.underline {
+	text-decoration: underline;
+}
+
 form {
 	margin-top: 0.5em;
 	padding: 0.5em 0.2em;
@@ -238,6 +242,10 @@ form {
 
 .button h4 {
 	color: white;
+}
+
+.narrow h4 {
+	width: 220px;
 }
 
 /* HANDY JAVASCRIPT STYLES */
