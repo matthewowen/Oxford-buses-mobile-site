@@ -8,6 +8,8 @@ DATABASE = 'stopsdb'
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
+#DB UTILITY FUNCTIONS
+
 def connect_db():
     return sqlite3.connect(DATABASE)
 
@@ -16,6 +18,8 @@ def query_db(query, args=(), one=False):
     rv = [dict((cur.description[idx][0], value)
                for idx, value in enumerate(row)) for row in cur.fetchall()]
     return (rv[0] if rv else None) if one else rv
+
+#CLASSES
 
 class BusStop(object):
 
@@ -106,6 +110,8 @@ class BusStop(object):
 			self.latitude = kwargs['latitude']
 		if 'longitude' in kwargs:
 			self.longitude = kwargs['longitude']
+
+#FUNCTIONS
 
 def name_joiner(bus_stop):
 	"""

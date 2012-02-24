@@ -60,6 +60,7 @@ div.location, div.stop-next-bus {
 	min-height: 2.7em;
 	width: 47%;
 	padding-top: 0.6em;
+	margin-right: 0.2em;
 }
 
 section.buses {

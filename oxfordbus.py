@@ -86,6 +86,9 @@ def enter_location():
 def get_location():
 	return render_template('get_location.html')
 
+
+# RUN CONFIG
+
 if app.config['DEBUG']:
     from werkzeug import SharedDataMiddleware
     import os
