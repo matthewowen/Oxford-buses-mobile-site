@@ -129,6 +129,8 @@ li {
 	border-right: none;
 }
 
+
+
 li.bus {
 	padding: 0.6em 0.2em 0.2em;
 	border: none;
@@ -247,6 +249,12 @@ form {
 
 .narrow h4 {
 	width: 220px;
+}
+
+#load-more {
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
 }
 
 /* HANDY JAVASCRIPT STYLES */
