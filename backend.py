@@ -5,7 +5,6 @@ from busscraper import stop, postcode
 app = Flask(__name__)
 
 DATABASE = 'stopsdb'
-
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 #DB UTILITY FUNCTIONS

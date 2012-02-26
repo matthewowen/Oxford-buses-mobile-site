@@ -77,7 +77,7 @@
 
 {% if more == True %}
 <div id="load-more" class="button">
-<a onclick="offset = loadMore(offset);">
+<a onclick="offset = doLoad(offset, {{ userlat }}, {{ userlong }});">
   <h4>Tap to load more...</h4>
 </a>
 </div>
@@ -127,11 +127,6 @@ for(var i=0; i<collection.length; i++)
 </script>
 
 {% if more == True %}
-<script type="text/javascript">
-var userlat = {{ userlat }};
-var userlong = {{ userlong }};
-</script>
-
-<script src="/static/js/load-more.js"></script>
+<script src="/static/js/load-more-v2.js"></script>
 {% endif %}
 {% endblock %}

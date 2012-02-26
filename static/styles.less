@@ -1,0 +1,276 @@
+// RESET
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
+
+// VARIABLES
+@darkblue: #4F94CD;
+@lightblue: #5CACEE;
+@darkgrey: #555;
+@beige: #FFFAFA;
+@lightgrey: #999;
+@red: red;
+
+// CORE POSITIONAL STYLING
+
+html, body {
+	font-family: Arial, Sans-serif;
+	color: #050505;
+	min-width: 340px;
+	min-height: 100%;	
+	background-color: #FFFAFA;
+}
+
+header {
+	background-color: @lightblue;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(@lightblue), to(@darkblue));
+	width: 100%;
+	height: 2em;
+	overflow: hidden;
+	text-align: center;
+}
+
+footer {
+	background-color: @lightblue;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(@darkblue), to(@lightblue));
+	width: 100%;
+	height: 1.8em;
+	overflow: hidden;
+
+	h4 {	
+		padding: 0.4em;
+	}
+}
+
+article {
+	min-height: 10em;
+}
+
+a.details, div.details {
+	min-height: 2em;
+	background-color: @beige;
+}
+
+div#stopinfo {
+	width: 45%;
+	min-height: 8em;
+	padding: 2%;
+	float: left;
+	color: white;
+	background-color: @darkgrey;
+}
+
+h2.stopname {
+	width: 45%;
+	min-height: 2.7em;
+	padding: 2%;
+	float: left;
+	color: white;
+	background-color: @darkgrey;
+}
+
+div.location, div.stop-next-bus {
+	float: right;
+	min-height: 2.7em;
+	width: 47%;
+	padding-top: 0.6em;
+	margin-right: 0.2em;
+}
+
+section.buses {
+	border-top: 1px solid @darkgrey;
+	clear: both;
+	padding: 0.2em;
+}
+
+div.spacer {
+	clear: both;
+}
+
+div.nextbus {
+	min-height: 3em;
+}
+
+div.service {
+	padding: 0.2em;
+	margin-top: 0.4em;
+	-webkit-border-radius: 1.1em;
+	-moz-border-radius: 1.1em;
+	border-radius: 1.1em;
+	background-color: @red;
+	width: 1.8em;
+	height: 1.8em;
+	text-align: center;
+	color: white;
+	float: left;
+}
+
+.service h4 {
+	margin-top: 0.3em;
+}
+
+div.businfo {
+	float: left;
+	margin-left: 0.5em;
+}
+
+div.stop-next-bus {
+	div.businfo {
+		width: 6em;
+	}
+}
+
+/* CORE LIST STYLING AND OVERRIDES */
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+#about {
+
+	ul {
+		margin-left: 0.4em;
+	}
+
+	li {
+		border: none;
+		list-style: circle inside;
+		padding: 0.3em 0 0 0.5em;
+	}
+
+	h2 {
+		font-weight: bold;
+	}
+
+	p {
+		margin-left: 0.2em;
+	}
+
+}
+
+li {
+	list-style: none;
+	clear: both;
+	border: 2px solid black;
+	border-left: none;
+	border-right: none;
+
+	h2 {
+		display: inline;
+	}
+
+	h3 {
+		font-weight: normal;
+	}
+}
+
+li.bus {
+	padding: 0.6em 0.2em 0.2em;
+	border: none;
+}
+
+
+/* HEADINGS */
+
+h1 {
+	font-size: 1.6em;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 1.4em;
+
+	h2#location-found {
+		display: none;
+	}
+}
+
+h3 {
+	font-size: 1.2em;
+}
+
+h4 {
+	padding-bottom: 0.2em;
+}
+
+h4.show-more {
+	float: right;
+	margin: 0.2em 0.2em 0 0;
+}
+
+h4.buses-jump {
+	clear: both;
+}
+
+/* TEXT AND FORM STYLING */
+
+p {
+	margin: 0.2em 0 0;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a.underline {
+	text-decoration: underline;
+}
+
+form {
+	margin-top: 0.5em;
+	padding: 0.5em 0.2em;
+}
+
+/* MISC BITS AND PIECES */
+
+#submit {
+	display: block;
+	margin: 0.6em 0 0 4.5em;
+}
+
+#postcode-instead{
+	padding: 0.6em;
+}
+
+/* BUTTON STYLE */
+
+.button{
+	background-color: @darkgrey;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(@darkgrey), to(@lightgrey));
+	padding: 0.6em;
+	border: 1px solid black;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+
+	h4 {
+		color: white;
+	}
+}
+
+.narrow h4 {
+	width: 220px;
+}
+
+#load-more {
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+/* HANDY JAVASCRIPT STYLES */
+
+.loading {
+	background-color: @darkgrey;
+	background-image: url("/static/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+#searching {
+	display: none;
+}
