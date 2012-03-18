@@ -21,7 +21,7 @@ We're trying to find your location to show stops near you...
 <a href="/postcode" title="search by postcode">I'd rather search by postcode...</a>
 </div>
 
-<h2 id="location-found">
+<h2 id="location-found" style="display:none">
 We've found your location! Finding buses at the stops near you...
 </h2>
 </section>
@@ -40,11 +40,12 @@ We've found your location! Finding buses at the stops near you...
 	if(geo_position_js.init()){
 		geo_position_js.getCurrentPosition(geo_success, geo_error);
 	}
+
 	function geo_success(p) {
-		var show = document.getElementById('location-found');
-		var hide = document.getElementById('searching');
-		hide.style.display = 'none';
-		show.style.display = 'block';
+		var locfound = document.getElementById('location-found');
+		var searching = document.getElementById('searching');
+		searching.style.display = 'none';
+		locfound.style.display = 'block';
 		window.location= "/stops/" + p.coords.latitude + "+" + p.coords.longitude
 	}
 	function geo_error() {
