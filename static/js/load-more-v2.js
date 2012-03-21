@@ -41,19 +41,17 @@ LoadMoreRequest.prototype.buildFirstItem = function(item, h) {
   
   h += "<section class=\"buses\">";
   h += "<a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + item + "');\">";
-  h += "<div class=\"nextbus\">";
+  h += "<div class=\"bus clearfix\">";
   h += "<div class=\"service\">";
   h += "<h4>" + this.obj.buses[item].service + "<\/h4>";
   h += "<\/div>";
   h += "<div class=\"businfo\">";
   h += "<p>To " + this.obj.buses[0].destination + "<\/p>";
-  h += "<p class=\"time\">" + this.obj.buses[item].minutes_to_departure + " minutes away<\/p>";
+  h += "<p class=\"time\">" + this.obj.buses[item].minutes_to_departure + " minutes<\/p>";
   h += "<\/div>";
-  h += "<h4 class=\"show-more button\">Show more<\/h4>";
   h += "<\/div>";
   h += "<\/a>";
   h += "<div class=\"bus-list\" id=\"" + item + "\">";
-  h += "<h4>Later buses:<\/h4>";
   h += "<ul>";
 
   return h;
@@ -67,11 +65,7 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	// enter the basic information about the stop
 	h += "<a class =\"details\" href=\"\/stop\/" + this.obj.atco + "?userlat=" + this.userlat + "&amp;userlong=" + this.userlong + "\" title=\"More about this.obj.name\">";
 	h += "<h2 class=\"stopname\">" + this.obj.name + "<\/h2>";
-	h += "<div class=\"location\">";
-	h += "<h4>" + this.obj.distance + " metres away<\/h4>";
-	h += "<h4 class=\"show-map button\">Show on map<\/h4>";
-	h += "<\/div>";
-	h += "<div class=\"spacer\"><\/div>";
+	h += "<h4 class=\"location\">" + this.obj.distance + " metres<\/h4>";
 	h += "<\/a>";
 
 	// if there are some buses, start building their info
@@ -87,27 +81,26 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	    // for the other buses, build their info
 	    else
 	    {
-	      h += "<li class=\"bus\">";
+	      h += "<li class=\"bus clearfix\">";
 	      h += "<div class=\"service\">";
 	      h += "<h4>" + this.obj.buses[item].service + "<\/h4>";
 	      h += "<\/div>";
 	      h += "<div class=\"businfo\">";
 	      h += "<p>To " + this.obj.buses[item].destination + "<\/p>";
-	      h += "<p class=\"time\">" + this.obj.buses[item].minutes_to_departure + " minutes away<\/p>";
+	      h += "<p class=\"time\">" + this.obj.buses[item].minutes_to_departure + " minutes<\/p>";
 	      h += "<\/div>";
 	      h += "<\/li>";
 	    }
 	  }
 	    // close the list
 	    h += "<\/ul>";
-	    h += "<div class=\"spacer\"><\/div>";
 	    h += "<\/div>";
 	    h += "<\/section>";    
 	}   
 
 	else {
 	  h += "<section class=\"buses\">";
-	  h += "<p>No more buses in the next hour<\/p>";
+	  h += "<p>No buses in the next hour<\/p>";
 	  h += "<\/section>";
 	}
 

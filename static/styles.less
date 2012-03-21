@@ -42,25 +42,29 @@ footer {
 
 	h4 {	
 		padding: 0.4em;
+		font-size: 0.8em;
+	}
+
+	a {
+		color: @red;
 	}
 }
 
 article {
 	min-height: 10em;
-	padding: 0 5px;
 }
 
 a.details, div.details {
 	background-color: @main;
 	position: relative;
-	padding: 12px 18px;
+	padding: 12px 18px 0;
 	display: block;
 }
 
 section.buses {
 	font-size: 0.8em;
 	clear: both;
-	padding: 0 0.2em 0.2em;
+	padding: 4px 18px 4px;
 }
 
 div.spacer {
@@ -81,7 +85,7 @@ div.service {
 	float: left;
 }
 
-.details:after {
+.stoplink:after {
 	content: "\232A";
 	float:right;
 	position:absolute;
@@ -94,11 +98,15 @@ div.service {
 	margin-top: 0.3em;
 }
 
-div.stop-next-bus {
-	div.businfo {
-		width: 6em;
-	}
+div.businfo {
+	padding-left: 5px;
+	float: left;
 }
+
+h4.show-more {
+	float: left
+}
+
 
 /* CORE LIST STYLING AND OVERRIDES */
 
@@ -146,8 +154,16 @@ li {
 }
 
 li.bus {
-	padding: 0.6em 0.2em 0.2em;
+	padding: 0.6em 0 0.2em;
 	border: none;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 
@@ -164,10 +180,6 @@ h2 {
 	#location-found {
 		display: none;
 	}
-}
-
-h4 {
-	padding-bottom: 0.2em;
 }
 
 h4.location {

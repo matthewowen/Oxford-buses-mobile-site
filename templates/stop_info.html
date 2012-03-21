@@ -15,13 +15,11 @@
 {% block body %}
 <section id="stop-content">
 <div class="details">
-	<div id="stopinfo">
 	<h2>{{ stop.name }}</h2>
 	<h4 id="duration" class="location"></h4>
-	</div>
 </div>
  
-<div class="buses">
+<section class="buses">
 <a name="buses"></a>
 <ul>
   {% if stop.buses %}
@@ -40,9 +38,9 @@
     <p>No buses in the next hour</p>
   {% endif %}
 </ul>
+</section>
 
 <div id="map_canvas" style="width: 100%; height: 300px"></div>
-</div>
 
 </section>
 {% endblock %}
