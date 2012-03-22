@@ -24,7 +24,7 @@
 <ul>
   {% if stop.buses %}
     {% for bus in stop.buses[1:] %}
-      <li class="bus">
+      <li class="bus clearfix">
         <div class="service">
 			<h4>{{ bus.service|replace("&nbsp;", "") }}</h4>
 		</div>

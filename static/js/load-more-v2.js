@@ -37,21 +37,21 @@ LoadMoreRequest.prototype.load = function() {
 	return offset + 10;
 }
 
-LoadMoreRequest.prototype.buildFirstItem = function(item, h) {
+LoadMoreRequest.prototype.buildFirstItem = function(index, h) {
   
   h += "<section class=\"buses\">";
-  h += "<a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + item + "');\">";
+  h += "<a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + index + "');\">";
   h += "<div class=\"bus clearfix\">";
   h += "<div class=\"service\">";
-  h += "<h4>" + this.obj.buses[item].service + "<\/h4>";
+  h += "<h4>" + this.obj.buses[0].service + "<\/h4>";
   h += "<\/div>";
   h += "<div class=\"businfo\">";
   h += "<p>To " + this.obj.buses[0].destination + "<\/p>";
-  h += "<p class=\"time\">" + this.obj.buses[item].minutes_to_departure + " minutes<\/p>";
+  h += "<p class=\"time\">" + this.obj.buses[0].minutes_to_departure + " minutes<\/p>";
   h += "<\/div>";
   h += "<\/div>";
   h += "<\/a>";
-  h += "<div class=\"bus-list\" id=\"" + item + "\">";
+  h += "<div class=\"bus-list\" id=\"" + index + "\">";
   h += "<ul>";
 
   return h;
@@ -63,7 +63,7 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	var h="";
 
 	// enter the basic information about the stop
-	h += "<a class =\"details\" href=\"\/stop\/" + this.obj.atco + "?userlat=" + this.userlat + "&amp;userlong=" + this.userlong + "\" title=\"More about this.obj.name\">";
+	h += "<a class =\"details\" href=\"\/stop\/" + this.obj.atco + "?userlat=" + this.userlat + "&amp;userlong=" + this.userlong + "\" title=\"More about " +  this.obj.name + "\">";
 	h += "<h2 class=\"stopname\">" + this.obj.name + "<\/h2>";
 	h += "<h4 class=\"location\">" + this.obj.distance + " metres<\/h4>";
 	h += "<\/a>";
@@ -76,7 +76,7 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	    // if it is the first bus, build it out as the first bus and start the list of later buses
 	    if (item == 0)
 	    {
-	      h = this.buildFirstItem(item, h)
+	      h = this.buildFirstItem(index, h)
 	    }
 	    // for the other buses, build their info
 	    else
