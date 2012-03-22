@@ -9,19 +9,15 @@
 {% endblock %}
 
 {% block body %}
-<section id="content">
+<section id="static">
 <h2>
-Hmmmm, we didn't understand that postcode.
+Hmmmm, we didn't understand that postcode. Try again?
 </h2>
-<h3>
-Try again?
-</h3>
 <form method="POST" action="/postcode/">
 <fieldset id="postcode">
-<label for="postcode">Postcode:</label>
-<input type="text" name="postcode" id="postcode"></input>
+<input type="text" name="postcode" id="postcode" placeholder="Postcode"></input>
 </fieldset>
-<input type="submit" value="Submit" id="submit"></input>
+<input type="submit" value="Go" id="submit"></input>
 </form>
 </section>
 {% endblock %}
