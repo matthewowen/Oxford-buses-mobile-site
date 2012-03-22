@@ -13,7 +13,9 @@ function LoadMoreRequest (offset, userlat, userlong) {
 LoadMoreRequest.prototype.load = function() {
 	// get the load-more section, show a loading gif there
   	l = document.getElementById("load-more");
-	l.setAttribute("class", "button loading");
+  	var oldH = l.innerHTML;
+  	var newH = "<h4>Loading...<\/h4>";
+	l.innerHTML = newH;
 	// open the request, grab the relevant stops
 	httpRequest=new XMLHttpRequest();
 	httpRequest.open("GET", this.resource, true);
@@ -30,6 +32,8 @@ LoadMoreRequest.prototype.load = function() {
 	    		}
 	  		}
 		}
+	// change the load-more bit back
+	l.innerHTML = oldH;
 	}
 
 	httpRequest.send(null);
@@ -129,8 +133,6 @@ LoadMoreRequest.prototype.createHTML = function() {
   {
     collection[i].style.display = 'none';
   }
-  // hide the loading gif
-  l.setAttribute("class", "button");
 }
 
 function doLoad (offset, userlong, userlat) {
