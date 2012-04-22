@@ -67,10 +67,9 @@ def stop_info(stop_id):
 def enter_location():
 	if request.method == 'POST':
 		postcode = request.form['postcode'].replace(" ", "")
-		http = httplib2.Http()
-		resp, content = http.request("http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % (postcode), "GET")
+		r = requests.get("http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % (postcode), "GET")
 		try:
-			d = simplejson.loads(content)
+			d = simplejson.loads(r.text)
 			latitude = d['results'][0]['geometry']['location']['lat']
 			longitude = d['results'][0]['geometry']['location']['lng']
 			url = "/stops/%s+%s" % (latitude, longitude)
@@ -85,7 +84,6 @@ def enter_location():
 @app.route('/')
 def get_location():
 	return render_template('get_location.html')
-
 
 # RUN CONFIG
 
