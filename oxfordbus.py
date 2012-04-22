@@ -67,7 +67,7 @@ def stop_info(stop_id):
 def enter_location():
 	if request.method == 'POST':
 		postcode = request.form['postcode'].replace(" ", "")
-		r = requests.get("http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % (postcode), "GET")
+		r = requests.get("http://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false" % (postcode))
 		try:
 			d = simplejson.loads(r.text)
 			latitude = d['results'][0]['geometry']['location']['lat']

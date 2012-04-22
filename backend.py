@@ -5,7 +5,7 @@ import oxscraper
 app = Flask(__name__)
 
 DATABASE = 'stopsdb'
-#r = redis.StrictRedis(host='localhost', port=6379, db=0)
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 #DB UTILITY FUNCTIONS
 
@@ -31,7 +31,6 @@ class BusStop(object):
 		buses = oxscraper.stop(self.atco).bus_list[:10]
 		
 		# record data about each bus in redis
-		"""
 		for bus in buses:
 			# increment the id counter so that the bus has a unique id
 			k = r.incr('bus.id')
@@ -44,7 +43,7 @@ class BusStop(object):
 		
 		# set the key to expire in a minute
 		r.expire(self.atco, 60)
-		"""
+
 		return buses
 
 	def retrieve_redis(self):
@@ -68,7 +67,7 @@ class BusStop(object):
 			# grab the info and put it in the dictionary
 			bus['service'] = r.get('bus:%s:service' % (v))
 			bus['destination'] = r.get('bus:%s:destination' % (v))
-			bus['minutes_to_departure'] = int(r.get('bus:%s:minutes_to_departure' % (v)))
+			bus['minutes_to_departure'] = r.get('bus:%s:minutes_to_departure' % (v))
 			# stick it on the list
 			buses.append(bus)
 
@@ -85,12 +84,12 @@ class BusStop(object):
 		return the buses for the stop in a list, soonest first
 		"""
 		# if there's a list for this stop in redis, use it
-		#if r.exists(self.atco):
-		#	buses = self.retrieve_redis()
+		if r.exists(self.atco):
+			buses = self.retrieve_redis()
 
 		# if we've not already got it in redis, go and get the stop info from oxontime and put it in redis
-		#else:
-		buses = self.retrieve_scraper()
+		else:
+			buses = self.retrieve_scraper()
 
 		# get rid of yucky stuff
 		#for bus in buses:
