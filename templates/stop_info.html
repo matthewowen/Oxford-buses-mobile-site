@@ -4,43 +4,27 @@
 <title>OxBus | {{stop.name }}</title>
 
 <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false">
+      src="http://maps.googleap
+is.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false">
 </script>
+{% endblock %}
+
+{% block header %}
+<h1><a href="/" title="Find location">OxBus</a> | {{ stop.name }}</h1>
 {% endblock %}
 
 {% block body %}
 <section id="stop-content">
 <div class="details">
-	<div id="stopinfo">
-	<h2>{{ stop['name'] }}</h2>
-	<h4 id="duration"></h4>
-	</div>
-	<div class="stop-next-bus">
-	{% if stop.buses %}
-	<div class="service">
-		<h4>{{ stop.buses[0].service|replace("&nbsp;", "") }}</h4>
-	</div>
-	<div class="businfo">
-	<p>{{ stop.buses[0].destination|replace("&nbsp;", "") }}</p>
-	<p class="time">{{ stop.buses[0].minutes_to_departure }} minutes</p>
-	</div>
-	<a href="#buses" class="buses-jump"><h4 class="buses-jump button">Jump to later buses</h4></a>
-	{% else %}
-	<h4>No buses in the next hour</h4>
-	{% endif %}
-	</div>
-	<div class="spacer"></div>
+	<h2>{{ stop.name }}</h2>
+	<h4 id="duration" class="location"></h4>
 </div>
-
-<div id="map_canvas" style="width: 100%; height: 300px"></div>
-
-<div class="buses">
-<a name="buses"></a>
-<h4>Later buses:</h4>
+ 
+<section class="buses">
 <ul>
-  {% if stop.buses[1:] %}
+  {% if stop.buses %}
     {% for bus in stop.buses[1:] %}
-      <li class="bus">
+      <li class="bus clearfix">
         <div class="service">
 			<h4>{{ bus.service|replace("&nbsp;", "") }}</h4>
 		</div>
@@ -51,13 +35,12 @@
       </li>
     {% endfor %}
   {% else %}
-    <p>No more buses in the next hour :(</p>
+    <p>No buses in the next hour</p>
   {% endif %}
 </ul>
-<div class="spacer"></div>
-<div id="directions"
-</div>
-</div>
+</section>
+
+<div id="map_canvas" style="width: 100%; height: 300px"></div>
 
 </section>
 {% endblock %}

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, g, redirect, request
-import httplib2, redis, sqlite3
-from busscraper import stop, postcode
+import requests, redis, sqlite3
+import oxscraper
 
 app = Flask(__name__)
 
@@ -28,7 +28,7 @@ class BusStop(object):
 		add those buses to redis for next time
 		"""	
 		# scrape the info - just take the first ten buses
-		buses = stop(self.atco, "oxfordshire")[:10]
+		buses = oxscraper.stop(self.atco).bus_list[:10]
 		
 		# record data about each bus in redis
 		for bus in buses:
@@ -92,9 +92,9 @@ class BusStop(object):
 			buses = self.retrieve_scraper()
 
 		# get rid of yucky stuff
-		for bus in buses:
-			bus['service'] = bus['service'].replace("&nbsp;", "")
-			bus['destination'] = bus['destination'].replace("&nbsp;", "")
+		#for bus in buses:
+			#bus['service'] = bus['service'].replace("&nbsp;", "")
+			#bus['destination'] = bus['destination'].replace("&nbsp;", "")
 
 		return buses
 

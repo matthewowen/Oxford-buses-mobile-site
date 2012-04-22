@@ -1,107 +1,84 @@
 {% extends "base.html" %}
 
 {% block head %}
-<title>OxBus | Nearby stops</title>
+<title>OxBus | Nearby</title>
+{% endblock %}
+
+{% block header %}
+<h1><a href="/" title="Find location">OxBus</a> | Nearby</h1>
 {% endblock %}
 
 {% block body %}
 
 {% if stop_list %}
-<section id="content">
-  <ul id="item-list">
-  {% for stop in stop_list %}
-    {% if stop['buses'] %}
-      <li>
-          <a class ="details" href="/stop/{{ stop.atco }}?userlat={{ userlat }}&amp;userlong={{ userlong }}" title="More about {{ stop.name }}">
-            <h2 class="stopname">{{ stop['name'] }}</h2>
-            <div class="location">
-            <h4>{{ stop['distance'] }} metres away</h4>
-            <h4 class="show-map button">Show on map</h4>
-            </div>
-            <div class="spacer"></div>
-          </a>
-          <section class="buses">
-            <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
-            <div class="nextbus">
-              <div class="service">
-                <h4>{{ stop.buses[0].service }}</h4>
-              </div>
-              <div class="businfo">
-                <p>To {{ stop.buses[0].destination }}</p>
-                <p class="time">{{ stop.buses[0].minutes_to_departure }} minutes away</p>
-              </div>
-              <h4 class="show-more button">Show more</h4>
-            </div>
+  <section id="content">
+    <ul id="item-list">
+    {% for stop in stop_list %}
+        <li>
+            <a class="details stoplink" href="/stop/{{ stop.atco }}?userlat={{ userlat }}&amp;userlong={{ userlong }}" title="More about {{ stop.name }}">
+              <h2 class="stopname">{{ stop.name }}</h2>
+              <h4 class="location">{{ stop.distance }} metres</h4>
             </a>
-            <div class="bus-list" id="{{ loop.index }}">
-            <h4>Later buses:</h4>
-            <ul>
-              {% if stop.buses[1:] %}
-                {% for bus in stop.buses[1:] %}
-                  <li class="bus">
-                    <div class="service">
-                      <h4>{{ bus.service }}</h4>
-                    </div>
-                    <div class="businfo">
-                      <p>To {{ bus.destination }}</p>
-                      <p class="time">{{ bus.minutes_to_departure }} minutes away</p>
-                    </div>
-                  </li>
-                {% endfor %}
+            <section class="buses">
+              {% if stop.buses %}
+              <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
+              <div class="bus clearfix">
+                <div class="service">
+                  <h4>{{ stop.buses[0].service }}</h4>
+                </div>
+                <div class="businfo">
+                  <p>To {{ stop.buses[0].destination }}</p>
+                  <p class="time">{{ stop.buses[0].minutes_to_departure }} minutes</p>
+                </div>
+              </div>
+              </a>
               {% else %}
-                <p>No more buses in the next hour :(</p>
+                <p>No buses in the next hour</p>
               {% endif %}
-            </ul>
-            <div class="spacer"></div>
-            </div>
-          </section>
-      </li>
-    {% else %}
-      <li>
-        <a class="details" href="/stop/{{ stop.atco }}?userlat={{ userlat }}&amp;userlong={{ userlong }}" title="More about {{ stop.name }}">
-          <h2 class="stopname">{{ stop['name'] }}</h2>
-          <div class="location"> 
-            <h4>{{ stop['distance'] }} metres away</h4>
-            <h4 class="show-map button">Show on map</h4>
-          </div>
-          <div class="spacer"></div>
-        </a>
-        <section class="buses">
-        <p>No more buses in the next hour</p>
-        </section>
-      </li>
-    {% endif %}
-  {% endfor %}
-  </ul>
-</section>
+              {% if stop.buses[1:] %}
+              <div class="bus-list" id="{{ loop.index }}">
+              <ul>
+                  {% for bus in stop.buses[1:] %}
+                    <li class="bus clearfix">
+                      <div class="service">
+                        <h4>{{ bus.service }}</h4>
+                      </div>
+                      <div class="businfo">
+                        <p>To {{ bus.destination }}</p>
+                        <p class="time">{{ bus.minutes_to_departure }} minutes</p>
+                      </div>
+                    </li>
+                  {% endfor %}
+              </ul>
+              </div>
+              {% endif %}
+            </section>
+        </li>
+    {% endfor %}
+    </ul>
+  </section>
 
-{% if more == True %}
-<div id="load-more" class="button">
-<a onclick="offset = doLoad(offset, {{ userlat }}, {{ userlong }});">
-  <h4>Tap to load more...</h4>
-</a>
-</div>
-{% endif %}
-
-<section id="postcode-instead">
-  <h4>Results don't look right?</h4> 
-  <a href="/postcode/" title="search by postcode">
-    <h4 class="button">Search by postcode instead...</h4>
+  {% if more == True %}
+  <div id="load-more" class="button">
+  <a onclick="offset = doLoad(offset, {{ userlat }}, {{ userlong }});">
+    <h4>Tap to load more...</h4>
   </a>
-</section>
+  </div>
+  {% endif %}
 {% else %}
-<section id="location">
-  <h2>Oh dear, we couldn't find any bus stops near you!</h2>
-  <h3><a class="underline" title="Buses from Oxford" href="/stops/51.7526+-1.258085">Tap here to see stops in central Oxford</a> or use the form below if you'd like to search by postcode:</h3>
-  <form method="POST" action="/postcode/">
-    <fieldset id="postcode">
-      <label for="postcode">Postcode:</label>
-      <input type="text" name="postcode" id="postcode"></input>
-    </fieldset>
-    <input type="submit" value="Submit" id="submit"></input>
-  </form>
-</section>
+  <section id="location">
+    <h2>Oh dear, we couldn't find any bus stops near you!</h2>
+    <h3><a class="underline" title="Buses from Oxford" href="/stops/51.7526+-1.258085">Tap here to see stops in central Oxford</a> or use the form below if you'd like to search by postcode:</h3>
+    <form method="POST" action="/postcode/">
+      <fieldset id="postcode">
+        <label for="postcode">Postcode:</label>
+        <input type="text" name="postcode" id="postcode"></input>
+      </fieldset>
+      <input type="submit" value="Submit" id="submit"></input>
+    </form>
+  </section>
 {% endif %}
+
 {% endblock %}
 
 {% block script%}

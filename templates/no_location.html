@@ -4,20 +4,20 @@
 <title>OxBus | Enter postcode</title>
 {% endblock %}
 
+{% block header %}
+<h1><a href="/" title="Find location">OxBus</a> | No location</h1>
+{% endblock %}
+
 {% block body %}
-<section id="background">
+<section id="static">
 <h2>
-Oh dear! We couldn't find your location!
+We couldn't find your location; enter your postcode to find nearby stops
 </h2>
-<h3>
-Enter your postcode below and we'll find the bus stops near you...
-</h3>
 <form method="POST" action="/postcode/">
 <fieldset id="postcode">
-<label for="postcode">Postcode:</label>
-<input type="text" name="postcode" id="postcode"></input>
+<input type="text" name="postcode" id="postcode" placeholder="Postcode"></input>
 </fieldset>
-<input type="submit" value="Submit" id="submit"></input>
+<input type="submit" value="Go" id="submit"></input>
 </form>
 </section>
 {% endblock %}
