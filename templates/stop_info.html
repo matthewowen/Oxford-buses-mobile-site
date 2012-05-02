@@ -23,7 +23,7 @@ is.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false"
 <section class="buses">
 <ul>
   {% if stop.buses %}
-    {% for bus in stop.buses[1:] %}
+    {% for bus in stop.buses %}
       <li class="bus clearfix">
         <div class="service">
 			<h4>{{ bus.service|replace("&nbsp;", "") }}</h4>
