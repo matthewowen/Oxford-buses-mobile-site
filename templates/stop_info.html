@@ -24,15 +24,7 @@ is.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false"
 <ul>
   {% if stop.buses %}
     {% for bus in stop.buses %}
-      <li class="bus clearfix">
-        <div class="service">
-			<h3>{{ bus.service|replace("&nbsp;", "") }}</h3>
-		</div>
-		<div class="businfo">
-			<p>To {{ bus.destination|replace("&nbsp;", "") }}</p>
-			<p class="time">{{ bus.minutes_to_departure }} minutes away</p>
-		</div>
-      </li>
+      {% include "bus_item.html" %}
     {% endfor %}
   {% else %}
     <p>No buses in the next hour</p>

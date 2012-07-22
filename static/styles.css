@@ -13,6 +13,7 @@ sub{vertical-align:text-bottom;}
 input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
 input,textarea,select{*font-size:100%;}
 legend{color:#000000;}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 html,body{font-family:Arial,Sans-serif;color:#333333;min-width:280px;max-width:600px;min-height:100%;background-color:#eeeeee;margin:auto;}
 header{background-color:#222222;width:100%;overflow:hidden;text-align:center;color:#eeeeee;}header a{color:#eeeeee;}
 footer{background-color:#eeeeee;width:100%;height:1.8em;overflow:hidden;border-top:1px solid #555555;text-align:center;}footer h4{padding:0.4em;font-size:0.8em;}
@@ -35,11 +36,10 @@ ul{margin:0;padding:0;}
 .item-list li li{border:0;padding-bottom:0.5em;}
 .item-list li h2{display:inline;}
 .item-list li h3{font-weight:normal;}
-.bus{padding:0.6em 0 0.2em;border:none;}
-.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.bus{padding:0.6em 0 0.2em;border:none;}.bus:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 #map_canvas{margin-top:5px;}
 h1{font-size:1em;padding:0.5em;font-weight:bold;color:#eeeeee;}
-h2 #location-found{display:none;}
+#location-found{display:none;}
 .location{color:#999999;font-size:0.8em;}
 p{margin:0.2em 0 0;}
 a{text-decoration:none;color:#333333;}

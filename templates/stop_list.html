@@ -38,15 +38,7 @@
               {% if stop.buses[1:] %}
               <ul class="bus-list" id="{{ loop.index }}">
                   {% for bus in stop.buses[1:] %}
-                    <li class="bus clearfix">
-                      <div class="service">
-                        <h3>{{ bus.service }}</h3>
-                      </div>
-                      <div class="businfo">
-                        <p>To {{ bus.destination }}</p>
-                        <p class="time">{{ bus.minutes_to_departure }} minutes</p>
-                      </div>
-                    </li>
+                    {% include "bus_item.html" %}
                   {% endfor %}
               </ul>
               {% endif %}

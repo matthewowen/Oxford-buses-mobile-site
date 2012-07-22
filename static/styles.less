@@ -9,6 +9,16 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 @soft-text: #999;
 @red: red;
 
+.clearfix {
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
 // CORE POSITIONAL STYLING
 
 html, body {
@@ -165,17 +175,9 @@ ul {
 .bus {
 	padding: 0.6em 0 0.2em;
 	border: none;
+    .clearfix;
 }
 
-.clearfix {
-    &:after {
-        content: ".";
-        display: block;
-        height: 0;
-        clear: both;
-        visibility: hidden;
-    }
-}
 
 #map_canvas {
 	margin-top: 5px;
