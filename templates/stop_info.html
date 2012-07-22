@@ -17,7 +17,7 @@ is.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false"
 <section id="stop-content">
 <div class="details">
 	<h2>{{ stop.name }}</h2>
-	<h4 id="duration" class="location"></h4>
+	<h3 id="duration" class="location"></h3>
 </div>
  
 <section class="buses">
@@ -26,7 +26,7 @@ is.com/maps/api/js?key=AIzaSyDU56iSDA9tKxWZ0dUn508FFacHU-rtFFo&amp;sensor=false"
     {% for bus in stop.buses %}
       <li class="bus clearfix">
         <div class="service">
-			<h4>{{ bus.service|replace("&nbsp;", "") }}</h4>
+			<h3>{{ bus.service|replace("&nbsp;", "") }}</h3>
 		</div>
 		<div class="businfo">
 			<p>To {{ bus.destination|replace("&nbsp;", "") }}</p>

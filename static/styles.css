@@ -13,38 +13,40 @@ sub{vertical-align:text-bottom;}
 input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
 input,textarea,select{*font-size:100%;}
 legend{color:#000000;}
-html,body{font-family:Arial,Sans-serif;color:#333333;min-width:280px;max-width:600px;min-height:100%;background-color:#ffffff;margin:auto;}
-header{background-color:#000000;width:100%;overflow:hidden;text-align:center;color:#ffffff;}header a{color:#ffffff;}
-footer{background-color:#ffffff;width:100%;height:1.8em;overflow:hidden;border-top:1px solid #dddddd;text-align:center;}footer h4{padding:0.4em;font-size:0.8em;}
+html,body{font-family:Arial,Sans-serif;color:#333333;min-width:280px;max-width:600px;min-height:100%;background-color:#eeeeee;margin:auto;}
+header{background-color:#222222;width:100%;overflow:hidden;text-align:center;color:#eeeeee;}header a{color:#eeeeee;}
+footer{background-color:#eeeeee;width:100%;height:1.8em;overflow:hidden;border-top:1px solid #555555;text-align:center;}footer h4{padding:0.4em;font-size:0.8em;}
 footer a{color:#ff0000;}
 article{min-height:10em;}
-a.details,div.details{background-color:#ffffff;position:relative;padding:12px 18px 0;display:block;}
-section.buses{font-size:0.8em;clear:both;padding:4px 18px 4px;}
-div.spacer{clear:both;}
-div.service{padding:0.2em;margin-top:0.4em;-webkit-border-radius:1.1em;-moz-border-radius:1.1em;border-radius:1.1em;background-color:#ff0000;width:1.8em;height:1.8em;text-align:center;color:white;float:left;}
-.stoplink:after{content:"\232A";float:right;position:absolute;right:12px;top:18px;color:#ccc;}
-.service h4{margin-top:0.3em;}
-div.businfo{padding-left:5px;float:left;}
-h4.show-more{float:left;}
+.details{background-color:#eeeeee;position:relative;padding:12px 18px 0;display:block;}
+.buses{font-size:0.8em;clear:both;padding:0 18px;}
+.spacer{clear:both;}
+.service{padding:0.2em;margin-top:0.4em;-webkit-border-radius:1.1em;-moz-border-radius:1.1em;border-radius:1.1em;background-color:#ff0000;width:1.8em;height:1.8em;text-align:center;color:white;float:left;}
+.stoplink:after{content:"\232A";float:right;position:absolute;right:12px;top:18px;color:#555555;}
+.service h3{margin-top:0.3em;}
+.businfo{padding-left:5px;float:left;}
+.show-more{float:left;}
 ul{margin:0;padding:0;}
-#static{padding:18px 12px;}#static ul{margin-left:0.4em;}
-#static li{border:none;list-style:circle inside;padding:0.3em 0 0 0.5em;}
-#static h2{font-weight:bold;}
-#static p{margin-left:0.2em;}
-li{list-style:none;clear:both;border:1px solid #dddddd;border-left:none;border-right:none;}li h2{display:inline;}
-li h3{font-weight:normal;}
-li.bus{padding:0.6em 0 0.2em;border:none;}
+.static{padding:18px 12px;}.static ul{margin-left:0.4em;}
+.static li{border:none;list-style:circle inside;padding:0.3em 0 0 0.5em;}
+.static h2{font-weight:bold;}
+.static p{margin-left:0.2em;}
+.item-list li{list-style:none;clear:both;border-bottom:1px solid #999999;padding-bottom:0.8em;}.item-list li:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.item-list li li{border:0;padding-bottom:0.5em;}
+.item-list li h2{display:inline;}
+.item-list li h3{font-weight:normal;}
+.bus{padding:0.6em 0 0.2em;border:none;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 #map_canvas{margin-top:5px;}
-h1{font-size:1em;padding:0.5em;font-weight:bold;color:#ffffff;}
+h1{font-size:1em;padding:0.5em;font-weight:bold;color:#eeeeee;}
 h2 #location-found{display:none;}
-h4.location{color:#999999;font-size:0.8em;}
+.location{color:#999999;font-size:0.8em;}
 p{margin:0.2em 0 0;}
 a{text-decoration:none;color:#333333;}
-a.underline{text-decoration:underline;}
+.underline{text-decoration:underline;}
 form{margin-top:8px;}
 #submit{display:block;margin-top:8px;}
 #postcode-instead{padding:0.6em;}
-.button{background-color:#dddddd;padding:0.6em;-moz-border-radius:0.3em;-webkit-border-radius:0.3em;border-radius:0.3em;text-decoration:none;cursor:pointer;text-align:center;}
+.load-more{display:block;background-color:#555555;padding:0.6em;text-decoration:none;cursor:pointer;text-align:center;color:#eeeeee;}
 .narrow h4{width:220px;}
 #searching{display:none;}

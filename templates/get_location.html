@@ -32,14 +32,11 @@ We've found your location! Finding buses at the stops near you...
 
 {% block script %}
 <script>
-	<!--
 		document.getElementById('searching').style.display= 'block';
-	//--!>
 </script>
 
 <script src="/static/js/geo.js"></script>
 <script>
-	<!--
 	if(geo_position_js.init()){
 		geo_position_js.getCurrentPosition(geo_success, geo_error);
 	}
@@ -51,8 +48,7 @@ We've found your location! Finding buses at the stops near you...
 		window.location= "/stops/" + p.coords.latitude + "+" + p.coords.longitude
 	}
 	function geo_error() {
-		window.location= "/no-location/"
+		window.location= "/no-location"
 	}
-	//--!>
 </script>
 {% endblock %}

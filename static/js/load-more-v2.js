@@ -47,7 +47,7 @@ LoadMoreRequest.prototype.buildFirstItem = function(index, h) {
   h += "<a class=\"show-more\" title=\"Show\/hide\" onclick=\"toggle_visibility('" + index + "');\">";
   h += "<div class=\"bus clearfix\">";
   h += "<div class=\"service\">";
-  h += "<h4>" + this.obj.buses[0].service + "<\/h4>";
+  h += "<h3>" + this.obj.buses[0].service + "<\/h3>";
   h += "<\/div>";
   h += "<div class=\"businfo\">";
   h += "<p>To " + this.obj.buses[0].destination + "<\/p>";
@@ -55,8 +55,7 @@ LoadMoreRequest.prototype.buildFirstItem = function(index, h) {
   h += "<\/div>";
   h += "<\/div>";
   h += "<\/a>";
-  h += "<div class=\"bus-list\" id=\"" + index + "\">";
-  h += "<ul>";
+  h += "<ul class=\"bus-list\" id=\"" + index + "\">";
 
   return h;
 }
@@ -69,7 +68,7 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	// enter the basic information about the stop
 	h += "<a class =\"details\" href=\"\/stop\/" + this.obj.atco + "?userlat=" + this.userlat + "&amp;userlong=" + this.userlong + "\" title=\"More about " +  this.obj.name + "\">";
 	h += "<h2 class=\"stopname\">" + this.obj.name + "<\/h2>";
-	h += "<h4 class=\"location\">" + this.obj.distance + " metres<\/h4>";
+	h += "<h3 class=\"location\">" + this.obj.distance + " metres<\/h3>";
 	h += "<\/a>";
 
 	// if there are some buses, start building their info
@@ -87,7 +86,7 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	    {
 	      h += "<li class=\"bus clearfix\">";
 	      h += "<div class=\"service\">";
-	      h += "<h4>" + this.obj.buses[item].service + "<\/h4>";
+	      h += "<h3>" + this.obj.buses[item].service + "<\/h3>";
 	      h += "<\/div>";
 	      h += "<div class=\"businfo\">";
 	      h += "<p>To " + this.obj.buses[item].destination + "<\/p>";
@@ -98,7 +97,6 @@ LoadMoreRequest.prototype.buildStop = function(obj, index) {
 	  }
 	    // close the list
 	    h += "<\/ul>";
-	    h += "<\/div>";
 	    h += "<\/section>";    
 	}   
 

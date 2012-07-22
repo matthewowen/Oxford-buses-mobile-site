@@ -2,9 +2,9 @@
 html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
 
 // VARIABLES
-@inverse: black;
-@button: #DDD;
-@main: white;
+@inverse: #222;
+@line: #555;
+@main: #EEE;
 @main-text: #333;
 @soft-text: #999;
 @red: red;
@@ -38,7 +38,7 @@ footer {
 	width: 100%;
 	height: 1.8em;
 	overflow: hidden;
-	border-top: 1px solid @button;
+	border-top: 1px solid @line;
 	text-align: center;
 
 	h4 {	
@@ -55,24 +55,24 @@ article {
 	min-height: 10em;
 }
 
-a.details, div.details {
+.details {
 	background-color: @main;
 	position: relative;
 	padding: 12px 18px 0;
 	display: block;
 }
 
-section.buses {
+.buses {
 	font-size: 0.8em;
 	clear: both;
-	padding: 4px 18px 4px;
+	padding: 0 18px;
 }
 
-div.spacer {
+.spacer {
 	clear: both;
 }
 
-div.service {
+.service {
 	padding: 0.2em;
 	margin-top: 0.4em;
 	-webkit-border-radius: 1.1em;
@@ -92,19 +92,19 @@ div.service {
 	position:absolute;
 	right:12px;
 	top:18px;
-	color:#ccc;
+	color: @line;
 }
 
-.service h4 {
+.service h3 {
 	margin-top: 0.3em;
 }
 
-div.businfo {
+.businfo {
 	padding-left: 5px;
 	float: left;
 }
 
-h4.show-more {
+.show-more {
 	float: left
 }
 
@@ -116,7 +116,7 @@ ul {
 	padding: 0;
 }
 
-#static {
+.static {
 
 	ul {
 		margin-left: 0.4em;
@@ -140,12 +140,18 @@ ul {
 
 }
 
-li {
+.item-list li {
 	list-style: none;
 	clear: both;
-	border: 1px solid @button;
-	border-left: none;
-	border-right: none;
+	border-bottom: 1px solid @soft-text;
+    padding-bottom: 0.8em;
+    .clearfix;
+
+    // list items within the list shouldn't have the border
+    li {
+        border: 0;
+        padding-bottom: 0.5em;
+    }
 
 	h2 {
 		display: inline;
@@ -156,17 +162,19 @@ li {
 	}
 }
 
-li.bus {
+.bus {
 	padding: 0.6em 0 0.2em;
 	border: none;
 }
 
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+.clearfix {
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
 }
 
 #map_canvas {
@@ -189,7 +197,7 @@ h2 {
 	}
 }
 
-h4.location {
+.location {
 	color: @soft-text;
 	font-size: 0.8em;
 }
@@ -205,7 +213,7 @@ a {
 	color: @main-text;
 }
 
-a.underline {
+.underline {
 	text-decoration: underline;
 }
 
@@ -224,17 +232,14 @@ form {
 	padding: 0.6em;
 }
 
-/* BUTTON STYLE */
-
-.button{
-	background-color: @button;
+.load-more {
+    display: block;
+	background-color: @line;
 	padding: 0.6em;
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	border-radius: 0.3em;
 	text-decoration: none;
 	cursor: pointer;
 	text-align: center;
+    color: @main;
 }
 
 .narrow h4 {

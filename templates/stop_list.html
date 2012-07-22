@@ -12,19 +12,19 @@
 
 {% if stop_list %}
   <section id="content">
-    <ul id="item-list">
+    <ul class="item-list" id="item-list">
     {% for stop in stop_list %}
         <li>
             <a class="details stoplink" href="/stop/{{ stop.atco }}?userlat={{ userlat }}&amp;userlong={{ userlong }}" title="More about {{ stop.name }}">
               <h2 class="stopname">{{ stop.name }}</h2>
-              <h4 class="location">{{ stop.distance }} metres</h4>
+              <h3 class="location">{{ stop.distance }} metres</h3>
             </a>
             <section class="buses">
               {% if stop.buses %}
               <a class="show-more" title="Show/hide" onclick="toggle_visibility('{{ loop.index }}');">
               <div class="bus clearfix">
                 <div class="service">
-                  <h4>{{ stop.buses[0].service }}</h4>
+                  <h3>{{ stop.buses[0].service }}</h3>
                 </div>
                 <div class="businfo">
                   <p>To {{ stop.buses[0].destination }}</p>
@@ -36,12 +36,11 @@
                 <p>No buses in the next hour</p>
               {% endif %}
               {% if stop.buses[1:] %}
-              <div class="bus-list" id="{{ loop.index }}">
-              <ul>
+              <ul class="bus-list" id="{{ loop.index }}">
                   {% for bus in stop.buses[1:] %}
                     <li class="bus clearfix">
                       <div class="service">
-                        <h4>{{ bus.service }}</h4>
+                        <h3>{{ bus.service }}</h3>
                       </div>
                       <div class="businfo">
                         <p>To {{ bus.destination }}</p>
@@ -50,7 +49,6 @@
                     </li>
                   {% endfor %}
               </ul>
-              </div>
               {% endif %}
             </section>
         </li>
@@ -59,11 +57,9 @@
   </section>
 
   {% if more == True %}
-  <div id="load-more" class="button">
-  <a onclick="offset = doLoad(offset, {{ userlat }}, {{ userlong }});">
+  <a class="load-more" id="load-more" onclick="offset = doLoad(offset, {{ userlat }}, {{ userlong }});">
     <h4>Tap to load more...</h4>
   </a>
-  </div>
   {% endif %}
 {% else %}
   <section id="location">
