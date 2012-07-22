@@ -1,6 +1,7 @@
 import requests
 from BeautifulSoup import BeautifulSoup
 
+
 def get_content(URL):
     """
     Pass a URL. Get back some Beautiful Soup.
@@ -10,6 +11,7 @@ def get_content(URL):
     soup = BeautifulSoup(r.text)
 
     return soup
+
 
 def parse_soup(soup):
     """
@@ -39,6 +41,7 @@ def parse_soup(soup):
 
     return bus_list
 
+
 class stop(object):
     """
     init with a stop id
@@ -46,7 +49,8 @@ class stop(object):
     """
 
     def get_buses(self):
-        url = 'http://www.oxontime.com/Naptan.aspx?t=departure&sa=%s&format=xhtml' % (self.id)
+        url = 'http://www.oxontime.com/Naptan.aspx' \
+            '?t=departure&sa=%s&format=xhtml' % (self.id)
 
         soup = get_content(url)
 
